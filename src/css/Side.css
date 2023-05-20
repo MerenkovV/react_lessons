@@ -12,6 +12,11 @@
          -o-transition-duration: 200ms;
             transition-duration: 200ms;
   }
+
+  .side__list li a.active {
+    color: rgb(196, 209, 254);
+  }
+
   .side__list li {
     padding: 5px 0 0 10px;
     width: 80%;
@@ -19,6 +24,11 @@
   .side__list li a:hover {
     color: rgb(211, 211, 211);
   }
+
+  .side__list li a.active:hover {
+    color: rgb(155, 176, 250);
+  }
+
   .side__list li:first-child {
     padding-top: 20px;
   }
