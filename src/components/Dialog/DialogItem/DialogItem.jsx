@@ -1,5 +1,5 @@
 import React from 'react'
-import "../css/DialogItem.css"
+import "./DialogItem.css"
 
 export default function DialogItem(props) {
     return (
