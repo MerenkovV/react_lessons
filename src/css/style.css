@@ -1,0 +1,172 @@
+#root {
+  height: 100%;
+}
+
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+  height: 100%;
+  display: grid;
+  grid-template-areas: "Header Header" "Side Main";
+  grid-template-columns: 200px 1fr;
+  grid-template-rows: 60px 1fr;
+  row-gap: 10px;
+  -webkit-column-gap: 10px;
+     -moz-column-gap: 10px;
+          column-gap: 10px;
+}
+
+.header {
+  grid-area: Header;
+  background: #747474;
+  height: 60px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: 0 0 20px 20px;
+}
+.header__image {
+  height: 50px;
+  width: 50px;
+  background: url("../image/logo.png") 0/cover no-repeat;
+  margin-left: 10px;
+}
+
+.side {
+  grid-area: Side;
+  background: #747474;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+.side__list li a {
+  color: white;
+  font-size: 28px;
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-transition-duration: 200ms;
+       -o-transition-duration: 200ms;
+          transition-duration: 200ms;
+}
+.side__list li {
+  padding: 5px 0 0 10px;
+  width: 80%;
+}
+.side__list li a:hover {
+  color: rgb(211, 211, 211);
+}
+.side__list li:first-child {
+  padding-top: 20px;
+}
+.side__list li:last-child {
+  padding-top: 50px;
+  padding-bottom: 40px;
+}
+
+.main {
+  grid-area: Main;
+  position: relative;
+}
+.main__profile-head {
+  height: 150px;
+  background: url("https://gas-kvas.com/uploads/posts/2023-02/1675492946_gas-kvas-com-p-fonovie-risunki-visoko-27.jpg") center/100% auto no-repeat;
+  border-radius: 20px;
+  -webkit-box-shadow: 0px 0px 10px 1px rgb(102, 102, 102);
+          box-shadow: 0px 0px 10px 1px rgb(102, 102, 102);
+}
+.main__profile {
+  margin-left: 10px;
+  margin-top: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.main__profile-content {
+  margin-left: 30px;
+}
+.main__profile-image {
+  width: 160px;
+  height: 160px;
+  border-radius: 10px;
+  background: url("https://i.pinimg.com/736x/47/16/07/471607026529caa5dbf824e81736be88.jpg") center/160px no-repeat;
+}
+.main__profile-name {
+  margin-bottom: 20px;
+}
+.main__profile-info p {
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 10px 0;
+}
+.main__posts {
+  margin-top: 20px;
+  margin-left: 10px;
+}
+.main__post-header {
+  margin-bottom: 30px;
+}
+.main__input {
+  width: 90%;
+  background: #e1e1e1;
+  padding: 10px 10px 20px 10px;
+  border: 1px solid #595959;
+  border-radius: 10px;
+  resize: none;
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-transition-duration: 200ms;
+       -o-transition-duration: 200ms;
+          transition-duration: 200ms;
+  display: block;
+}
+.main__input:focus {
+  -webkit-box-shadow: 0px 0px 10px 1px rgb(102, 102, 102);
+          box-shadow: 0px 0px 10px 1px rgb(102, 102, 102);
+}
+.main__button {
+  background: #b3b3b3;
+  padding: 6px 40px;
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-top: 5px;
+  border-radius: 10px;
+}
+.main__button:hover {
+  -webkit-box-shadow: 0px 0px 5px 0px rgb(171, 171, 171);
+          box-shadow: 0px 0px 5px 0px rgb(171, 171, 171);
+}
+.main__button:active {
+  background: #a4a4a4;
+  -webkit-box-shadow: 0px 0px 5px 1px rgb(171, 171, 171);
+          box-shadow: 0px 0px 5px 1px rgb(171, 171, 171);
+}
+.main__posts-wrapper {
+  margin-top: 40px;
+}
+
+.high-text {
+  font-size: 25px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.post-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  min-height: 60px;
+  width: 100%;
+}
+.post-item__image {
+  height: 60px;
+  width: 60px;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 60px;
+          flex: 0 0 60px;
+  border-radius: 50%;
+  background: url("https://i.pinimg.com/736x/47/16/07/471607026529caa5dbf824e81736be88.jpg") center/60px no-repeat;
+}
+.post-item__text {
+  margin-left: 40px;
+  font-size: 25px;
+}
