@@ -1,0 +1,28 @@
+.side {
+    grid-area: Side;
+    background: #747474;
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+  .side__list li a {
+    color: white;
+    font-size: 28px;
+    font-family: Arial, Helvetica, sans-serif;
+    -webkit-transition-duration: 200ms;
+         -o-transition-duration: 200ms;
+            transition-duration: 200ms;
+  }
+  .side__list li {
+    padding: 5px 0 0 10px;
+    width: 80%;
+  }
+  .side__list li a:hover {
+    color: rgb(211, 211, 211);
+  }
+  .side__list li:first-child {
+    padding-top: 20px;
+  }
+  .side__list li:last-child {
+    padding-top: 50px;
+    padding-bottom: 40px;
+  }
