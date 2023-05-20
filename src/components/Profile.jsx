@@ -25,9 +25,9 @@ export default function Profile() {
                 <textarea placeholder='Your news...' type="text" className="main__input" />
                 <button className="main__button">Send</button>
                 <div className="main__posts-wrapper">
-                    <Post />
-                    <Post />
-                    <Post />
+                    <Post text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, dolor? Iste, itaque tempora esse cupiditate ea architecto deserunt quaerat. Culpa."/>
+                    <Post text="Информационные технологии (от англ. IT, Information technology) — это использование компьютерных систем или устройств для передачи информации. Такими технологиями пользуются не только работники IT-сферы, но и все люди на планете — от CEO в корпорациях до продавцов на индийских рынках."/>
+                    <Post text="Человек ежедневно взаимодействует с IT-сферой: хранит, отправляет и скачивает информацию. Мама троих детей, которая добавляет в заметки на iPhone список новогодних подарков, тоже использует информационные технологии."/>
                 </div>
             </div>
         </main>
