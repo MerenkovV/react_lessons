@@ -15,8 +15,14 @@ export default function (props) {
         <ul className="main__dialogs">
           {dialogElements}
         </ul>
+        <div className="main__chatwrapper">
         <div className="main__chat">
           {messageElements}
+        </div>
+        <div className="main__write">
+          <textarea name="" id="" cols="30" rows="10"></textarea>
+          <button>Send</button>
+        </div>
         </div>
       </div>
     </main>

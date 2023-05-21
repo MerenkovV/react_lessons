@@ -2,6 +2,8 @@
     grid-area: Main;
     position: relative;
     padding: 10px 0 0 20px;
+    max-height: 890px;
+    position: relative;
   }
   .main__header {
     font-size: 25px;
@@ -12,11 +14,16 @@
     display: grid;
     grid-template-columns: 1fr 3fr;
     height: 90%;
+    position: relative;
   }
   .main__dialogs {
+    position: relative;
     padding-right: 10px;
-    height: 100%;
+    height: 95%;
+    margin-top: 8%;
     border-right: 1px solid #cdcdcd;
+    max-height: 850px;
+    overflow-y: scroll;
   }
   .main__dialogs li a{
     display: -webkit-box;
@@ -52,4 +59,53 @@
   .main__item {
     padding-left: 30px;
     margin-bottom: 30px;
+  }
+
+  .main__chatwrapper{
+    display: flex;
+    position: inherit;
+    flex-direction: column;
+    max-height: 850px;
+  }
+
+  .main__chat{
+    flex: 1 0 80%;
+    height: 80%;
+    overflow-y: scroll;
+
+  }
+
+  .main__write{
+    flex: 0 0 100px;
+    height: 100px;
+    padding: 0px 0;
+    display: flex;
+    position: relative;
+  }
+
+  .main__write textarea{
+    padding: 8px 5px;
+    background: #cecece;
+    width: 90%;
+    resize: none;
+    border-radius: 10px;
+    margin-left: 5px;
+    box-shadow: 0 0 4px 1px rgb(167, 167, 167);
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .main__write button{
+    margin-left: 2%;
+    width: 5%;
+    height: 40px;
+    border-radius: 5px;
+    background: #c0c0c0;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+  }
+
+  .main__write button:hover{
+    background: #c8c8c8;
   }

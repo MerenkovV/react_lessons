@@ -4,7 +4,13 @@ import Post from './Post/Post';
 
 export default function Profile(props) {
 
-    
+    let TextElement = React.createRef();
+
+    const SendMes = () => {
+        let text = TextElement.current.value;
+        props.AddPost(text);
+        TextElement.current.value = "";
+    };
 
     let postElements = props.profilePage.posts.map( post => <Post text={post.text} likes={post.likes}/>);
 
@@ -27,8 +33,8 @@ export default function Profile(props) {
             </div>
             <div className="main__posts">
                 <h2 className="main__post-header high-text">My Posts</h2>
-                <textarea placeholder='Your news...' type="text" className="main__input" />
-                <button className="main__button">Send</button>
+                <textarea ref={TextElement} placeholder='Your news...' type="text" className="main__input" />
+                <button className="main__button" onClick={SendMes}>Send</button>
                 <div className="main__posts-wrapper">
                     {postElements}
                 </div>
