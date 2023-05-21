@@ -36,3 +36,54 @@
     padding-top: 50px;
     padding-bottom: 40px;
   }
+
+  .side__friends{
+    padding-top: 30px;
+    padding-left: 10px;
+  }
+
+  .side__hightext{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    color: white;
+  }
+
+  .side__friend{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    width: 92%;
+    justify-content: space-around;
+  }
+
+  .friend{
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 33%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+    transition-duration: 300ms;
+    padding: 6px 0;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  .friend:hover{
+    background: #828282;
+    
+    box-shadow: 0 0 8px 1px #4f4f4f;
+  }
+
+  .friend__image{
+    background: #fdd300;
+    width: 40px;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+  }
+
+  .friend__name{
+    margin-top: 10px;
+    color: #ffffff;
+  }

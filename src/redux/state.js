@@ -22,6 +22,13 @@ let state = {
             { name: "Vlados", message: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil obcaecati id fuga officiis doloremque?" },
             { name: "Me", message: "Hey, does it works???))))" },
         ]
+    },
+    sidebar: {
+        friends: [
+            {name: "Vlados" },
+            {name: "Alex" },
+            {name: "Viktor" },
+        ]
     }
 };
 

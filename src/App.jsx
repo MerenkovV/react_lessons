@@ -15,7 +15,7 @@ function App(props) {
       <div className="container">
         <div className="grid">
           <Header />
-          <Side />
+          <Side state={props.state.sidebar}/>
           <Routes>
             <Route path='/dialogs/*' element={<Dialogs dialogsPage={props.state.dialogsPage} />} />
             <Route path='/profile/*' element={<Profile profilePage={props.state.profilePage} />} />
