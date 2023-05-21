@@ -50,45 +50,42 @@ let store = {
         },
         sidebar: {
             friends: [
-                {name: "Vlados" },
-                {name: "Alex" },
-                {name: "Viktor" },
+                { name: "Vlados" },
+                { name: "Alex" },
+                { name: "Viktor" },
             ]
         }
     },
 
-    _callSubscriber(){
+    _callSubscriber() {
 
     },
 
-    getState(){
+    getState() {
         return this._state;
     },
 
-    AddPost(PostMessage){
-        let NewPost = {
-            text: PostMessage,
-            likes: 1,
-        };
-        this._state.profilePage.posts.push(NewPost);
-        this._callSubscriber(this.getState());
-    },
-
-    AddMessage(DialogMessage){
-        debugger;
-        let NewMessage = {
-            name: "Me",
-            message: DialogMessage,
-        };
-        debugger;
-        this._state.dialogsPage.messages.push(NewMessage);
-        this._callSubscriber(this.getState());
-        debugger;
-    },
-
-    subscribe(observer){
+    subscribe(observer) {
         this._callSubscriber = observer;
     },
+
+    dispatch(action) {
+        if (action.type === "ADD-MESSAGE") {
+            let NewMessage = {
+                name: "Me",
+                message: action.DialogMessage,
+            };
+            this._state.dialogsPage.messages.push(NewMessage);
+            this._callSubscriber(this.getState());
+        } else if (action.type === "ADD-POST") {
+            let NewPost = {
+                text: action.PostMessage,
+                likes: 1,
+            };
+            this._state.profilePage.posts.push(NewPost);
+            this._callSubscriber(this.getState());
+        }
+    }
 };
 
 export default store;

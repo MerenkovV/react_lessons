@@ -9,7 +9,10 @@ export default function (props) {
 
   let AddMess = () => {
     let Text = TextArea.current.value;
-    props.AddMessage(Text);
+    props.dispatch({
+      type: "ADD-MESSAGE",
+      DialogMessage: Text,
+    });
     TextArea.current.value = "";
   }
 

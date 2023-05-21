@@ -17,8 +17,8 @@ function App(props) {
           <Header />
           <Side state={props.state.sidebar}/>
           <Routes>
-            <Route path='/dialogs/*' element={<Dialogs dialogsPage={props.state.dialogsPage} AddMessage={props.AddMessage}/>} />
-            <Route path='/profile/*' element={<Profile profilePage={props.state.profilePage} AddPost={props.AddPost}/>} />
+            <Route path='/dialogs/*' element={<Dialogs dialogsPage={props.state.dialogsPage} dispatch={props.dispatch}/>} />
+            <Route path='/profile/*' element={<Profile profilePage={props.state.profilePage} dispatch={props.dispatch}/>} />
           </Routes>
         </div>
       </div>

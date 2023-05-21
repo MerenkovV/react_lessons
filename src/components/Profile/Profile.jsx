@@ -8,7 +8,10 @@ export default function Profile(props) {
 
     const SendMes = () => {
         let text = TextElement.current.value;
-        props.AddPost(text);
+        props.dispatch({
+            type: "ADD-POST",
+            PostMessage: text,
+        });
         TextElement.current.value = "";
     };
 
