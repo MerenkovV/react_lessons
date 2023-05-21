@@ -9,16 +9,16 @@ import Dialogs from './components/Dialog/Dialogs';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 
-function App() {
+function App(props) {
   return (
     <BrowserRouter>
       <div className="container">
         <div className="grid">
           <Header />
-          <Side />
+          <Side/>
           <Routes>
-            <Route path='/dialogs/*' element={<Dialogs />} />
-            <Route path='/profile/*' element={<Profile />} />
+            <Route path='/dialogs/*' element={<Dialogs dialogs={props.dialogs} messages={props.messages}/>} />
+            <Route path='/profile/*' element={<Profile posts={props.posts}/>} />
           </Routes>
         </div>
       </div>
