@@ -1,6 +1,9 @@
 import React from 'react';
 import "./Profile.css";
 import Post from './Post/Post';
+import { AddPostActionCreator } from '../../redux/state';
+
+
 
 export default function Profile(props) {
 
@@ -8,10 +11,7 @@ export default function Profile(props) {
 
     const SendMes = () => {
         let text = TextElement.current.value;
-        props.dispatch({
-            type: "ADD-POST",
-            PostMessage: text,
-        });
+        props.dispatch(AddPostActionCreator(text));
         TextElement.current.value = "";
     };
 

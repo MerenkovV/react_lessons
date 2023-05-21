@@ -2,6 +2,9 @@ import React from 'react'
 import DialogItem from './DialogItem/DialogItem'
 import "./Dialogs.css"
 import DialogMan from './DialogMan/DialogMan'
+import { AddMessageActionCreator} from '../../redux/state'
+
+
 
 export default function (props) {
 
@@ -9,10 +12,7 @@ export default function (props) {
 
   let AddMess = () => {
     let Text = TextArea.current.value;
-    props.dispatch({
-      type: "ADD-MESSAGE",
-      DialogMessage: Text,
-    });
+    props.dispatch(AddMessageActionCreator(Text));
     TextArea.current.value = "";
   }
 

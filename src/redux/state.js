@@ -1,3 +1,5 @@
+import DialogsPageReducer from "./DialogsPageReducer copy";
+import ProfilePageReducer from "./ProfilePageReducer";
 
 
 let store = {
@@ -70,22 +72,30 @@ let store = {
     },
 
     dispatch(action) {
-        if (action.type === "ADD-MESSAGE") {
-            let NewMessage = {
-                name: "Me",
-                message: action.DialogMessage,
-            };
-            this._state.dialogsPage.messages.push(NewMessage);
-            this._callSubscriber(this.getState());
-        } else if (action.type === "ADD-POST") {
-            let NewPost = {
-                text: action.PostMessage,
-                likes: 1,
-            };
-            this._state.profilePage.posts.push(NewPost);
-            this._callSubscriber(this.getState());
-        }
+
+        this._state = ProfilePageReducer(action, this._state);
+        this._state = DialogsPageReducer(action, this._state);
+
+        this._callSubscriber(this.getState());
     }
+};
+
+export const AddMessageActionCreator = (Text) => {
+    return(
+      {
+        type: "ADD-MESSAGE",
+        DialogMessage: Text,
+      }
+    )
+};
+
+export const AddPostActionCreator = (text) => {
+    return(
+        {
+            type: "ADD-POST",
+            PostMessage: text,
+        }
+    )
 };
 
 export default store;
