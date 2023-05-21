@@ -2,21 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
-import state, { AddMessage, AddPost, subscribe } from './redux/state';
+import store from './redux/state';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 
 let renderEntireTree = (state) => {
   root.render(
-<React.StrictMode>
-  <App state={state} AddPost={AddPost} AddMessage={AddMessage}/>
-</React.StrictMode>
+    <React.StrictMode>
+      <App state={state} AddPost={store.AddPost.bind(store)} AddMessage={store.AddMessage.bind(store)} />
+    </React.StrictMode>
   );
 };
 
-renderEntireTree(state);
+renderEntireTree(store.getState());
 
-subscribe(renderEntireTree);
+store.subscribe(renderEntireTree);
 
