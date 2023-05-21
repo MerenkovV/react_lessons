@@ -5,8 +5,8 @@ import DialogMan from './DialogMan/DialogMan'
 
 export default function (props) {
 
-  let dialogElements = props.dialogs.map(data => <DialogMan id={data.id} name={data.name} />);
-  let messageElements = props.messages.map(data => <DialogItem name={data.name} text={data.message} />);
+  let dialogElements = props.dialogsPage.dialogs.map(data => <DialogMan id={data.id} name={data.name} />);
+  let messageElements = props.dialogsPage.messages.map(data => <DialogItem name={data.name} text={data.message} />);
 
   return (
     <main className="main">

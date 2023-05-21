@@ -1,27 +1,37 @@
 .item {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-  }
-  .item__image {
-    height: 60px;
-    width: 60px;
-    background: url("https://abrakadabra.fun/uploads/posts/2021-12/thumbs/1640716800_55-abrakadabra-fun-p-smail-cherno-belii-56.jpg") center/cover no-repeat;
-  }
-  .item__name {
-    width: 60px;
-    display: block;
-    text-align: center;
-    font-size: 16px;
-    font-family: Arial, Helvetica, sans-serif;
-    color: #818181;
-    font-weight: 600;
-  }
-  .item__text {
-    margin-left: 30px;
-    padding: 20px;
-    border: 2px solid #9a9a9a;
-    border-radius: 10px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 20px;
-  }
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.item__person:last-child {
+  margin-left: 30px;
+}
+
+.item__image {
+  height: 60px;
+  width: 60px;
+  background: url("https://abrakadabra.fun/uploads/posts/2021-12/thumbs/1640716800_55-abrakadabra-fun-p-smail-cherno-belii-56.jpg") center/cover no-repeat;
+}
+
+.item__name {
+  width: 60px;
+  display: block;
+  text-align: center;
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #818181;
+  font-weight: 600;
+}
+
+.item__text {
+  padding: 20px;
+  border: 2px solid #9a9a9a;
+  border-radius: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+}
+
+.item__text:last-child {
+  margin-left: 30px;
+}

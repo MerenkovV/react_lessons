@@ -6,7 +6,7 @@ export default function Profile(props) {
 
     
 
-    let postElements = props.posts.map( post => <Post text={post.text} likes={post.likes}/>);
+    let postElements = props.profilePage.posts.map( post => <Post text={post.text} likes={post.likes}/>);
 
     return (
         <main className="main">
