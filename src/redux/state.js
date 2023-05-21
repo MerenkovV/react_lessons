@@ -1,4 +1,7 @@
-import { renderEntireTree } from "../render";
+
+let renderEntireTree = () => {
+
+};
 
 let state = {
     profilePage: {
@@ -63,6 +66,19 @@ export let AddPost = (PostMessage) => {
     };
     state.profilePage.posts.push(NewPost);
     renderEntireTree(state);
+}
+
+export let AddMessage = (DialogMessage) => {
+    let NewMessage = {
+        name: "Me",
+        message: DialogMessage,
+    };
+    state.dialogsPage.messages.push(NewMessage);
+    renderEntireTree(state);
+}
+
+export const subscribe = (observer) => {
+    renderEntireTree = observer;
 }
 
 export default state;
