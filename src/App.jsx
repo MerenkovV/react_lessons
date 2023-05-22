@@ -4,9 +4,9 @@ import './css/App.css';
 import './css/nullstyle.css';
 import Header from './components/Header/Header';
 import Side from './components/Side/Side';
-import Profile from './components/Profile/Profile';
-import Dialogs from './components/Dialog/Dialogs';
+import ProfileContainer from './components/Profile/ProfileContainer';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import DialogsContainer from './components/Dialog/DialogsContainer';
 
 
 function App(props) {
@@ -15,10 +15,10 @@ function App(props) {
       <div className="container">
         <div className="grid">
           <Header />
-          <Side state={props.state.sidebar}/>
+          <Side state={props.store.getState().sidebar}/>
           <Routes>
-            <Route path='/dialogs/*' element={<Dialogs dialogsPage={props.state.dialogsPage} dispatch={props.dispatch}/>} />
-            <Route path='/profile/*' element={<Profile profilePage={props.state.profilePage} dispatch={props.dispatch}/>} />
+            <Route path='/dialogs/*' element={<DialogsContainer store={props.store}/>} />
+            <Route path='/profile/*' element={<ProfileContainer store={props.store}/>} />
           </Routes>
         </div>
       </div>

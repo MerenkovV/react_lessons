@@ -1,7 +1,6 @@
 import React from 'react';
 import "./Profile.css";
 import Post from './Post/Post';
-import { AddPostActionCreator } from '../../redux/ProfilePageReducer';
 
 
 
@@ -10,13 +9,14 @@ export default function Profile(props) {
 
     let TextElement = React.createRef();
 
-    const SendMes = () => {
+    const onSendMes = () => {
         let text = TextElement.current.value;
-        props.dispatch(AddPostActionCreator(text));
+        props.SendMes(text);
         TextElement.current.value = "";
     };
 
-    let postElements = props.profilePage.posts.map( post => <Post text={post.text} likes={post.likes}/>);
+    let postElements = props.posts
+        .map( post => <Post text={post.text} likes={post.likes}/>);
 
     return (
         <main className="main">
@@ -38,7 +38,7 @@ export default function Profile(props) {
             <div className="main__posts">
                 <h2 className="main__post-header high-text">My Posts</h2>
                 <textarea ref={TextElement} placeholder='Your news...' type="text" className="main__input" />
-                <button className="main__button" onClick={SendMes}>Send</button>
+                <button className="main__button" onClick={onSendMes}>Send</button>
                 <div className="main__posts-wrapper">
                     {postElements}
                 </div>

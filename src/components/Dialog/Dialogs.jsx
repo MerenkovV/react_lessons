@@ -2,23 +2,22 @@ import React from 'react'
 import DialogItem from './DialogItem/DialogItem'
 import "./Dialogs.css"
 import DialogMan from './DialogMan/DialogMan'
-import { AddMessageActionCreator } from '../../redux/DialogsPageReducer'
 
 
 
 
-export default function (props) {
+export default function Dialogs(props) {
 
   let TextArea = React.createRef()
 
-  let AddMess = () => {
+  let onAddMess = () => {
     let Text = TextArea.current.value;
-    props.dispatch(AddMessageActionCreator(Text));
+    props.AddMess(Text);
     TextArea.current.value = "";
   }
 
-  let dialogElements = props.dialogsPage.dialogs.map(data => <DialogMan id={data.id} name={data.name} />);
-  let messageElements = props.dialogsPage.messages.map(data => <DialogItem name={data.name} text={data.message} />);
+  let dialogElements = props.dialogs.map(data => <DialogMan id={data.id} name={data.name} />);
+  let messageElements = props.messages.map(data => <DialogItem name={data.name} text={data.message} />);
 
   return (
     <main className="main">
@@ -33,7 +32,7 @@ export default function (props) {
         </div>
         <div className="main__write">
           <textarea ref={TextArea} name="" id="" cols="30" rows="10"></textarea>
-          <button onClick={AddMess}>Send</button>
+          <button onClick={onAddMess}>Send</button>
         </div>
         </div>
       </div>
