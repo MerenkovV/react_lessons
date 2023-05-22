@@ -19,18 +19,14 @@ export const AddPostActionCreator = (text) => {
 };
 const ProfilePageReducer = (state = initialState, action) => {
 
-    let stateCopy = {...state};
-    stateCopy.posts = [...state.posts];
-
     if (action.type === "ADD-POST") {
-        let NewPost = {
-            text: action.PostMessage,
-            likes: 1,
-        };
-        stateCopy.posts.push(NewPost);
+        return {
+            ...state,
+            posts: [...state.posts, {text: action.PostMessage,likes: 1}]
+        }
     }
 
-    return stateCopy;
+    return state;
 };
 
 export default ProfilePageReducer;

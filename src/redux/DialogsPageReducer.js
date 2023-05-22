@@ -46,18 +46,13 @@ export const AddMessageActionCreator = (Text) => {
 
 const DialogsPageReducer = (state = initialState, action) => {
 
-  let stateCopy = {...state};
-  stateCopy.messages = [...state.messages];
-
     if (action.type === "ADD-MESSAGE") {
-        let NewMessage = {
-            name: "Me",
-            message: action.DialogMessage,
-        };
-        stateCopy.messages.push(NewMessage);
+        return {
+          ...state,
+          messages: [...state.messages, {name: "Me", message: action.DialogMessage}]
+        }
     }
-
-    return stateCopy;
+    return state;
 };
 
 export default DialogsPageReducer;
