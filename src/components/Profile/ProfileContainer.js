@@ -1,21 +1,22 @@
 import React from 'react';
 import { AddPostActionCreator } from '../../redux/ProfilePageReducer';
 import Profile from './Profile';
-import StoreContext from '../../StoreContext';
+import { connect } from 'react-redux';
 
+let mapStateToProps = (state) => {
+    return {
+        posts: state.profilePage.posts
+    }
+};
 
-
-export default function ProfileContainer() {
-    return <StoreContext.Consumer>
-        {
-            (store) => {
-                const SendMes = (text) => {
-                    store.dispatch(AddPostActionCreator(text));
-                };
-                return (
-                    <Profile SendMes={SendMes} posts={store.getState().profilePage.posts} />
-                )
-            }
+let mapDispatchToProps = (dispatch) => {
+    return {
+        SendMes: (text) => {
+            dispatch(AddPostActionCreator(text));
         }
-    </StoreContext.Consumer>
-}
+    }
+};
+
+const ProfileContainer = connect(mapStateToProps, mapDispatchToProps)(Profile);
+
+export default ProfileContainer;
