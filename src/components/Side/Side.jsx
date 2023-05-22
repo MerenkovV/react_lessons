@@ -4,7 +4,9 @@ import { NavLink } from 'react-router-dom';
 import Friend from './Friend/Friend';
 
 export default function Side(props) {
+  
   let FriendSet = props.state.friends.map( friend => <Friend name={friend.name}/>);
+  
   return (
     <side className="side">
       <ul className="side__list">

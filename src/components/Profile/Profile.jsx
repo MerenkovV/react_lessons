@@ -1,7 +1,8 @@
 import React from 'react';
 import "./Profile.css";
 import Post from './Post/Post';
-import { AddPostActionCreator } from '../../redux/state';
+import { AddPostActionCreator } from '../../redux/ProfilePageReducer';
+
 
 
 

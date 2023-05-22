@@ -1,4 +1,4 @@
-import DialogsPageReducer from "./DialogsPageReducer copy";
+import DialogsPageReducer from "./DialogsPageReducer";
 import ProfilePageReducer from "./ProfilePageReducer";
 
 
@@ -80,22 +80,5 @@ let store = {
     }
 };
 
-export const AddMessageActionCreator = (Text) => {
-    return(
-      {
-        type: "ADD-MESSAGE",
-        DialogMessage: Text,
-      }
-    )
-};
-
-export const AddPostActionCreator = (text) => {
-    return(
-        {
-            type: "ADD-POST",
-            PostMessage: text,
-        }
-    )
-};
 
 export default store;

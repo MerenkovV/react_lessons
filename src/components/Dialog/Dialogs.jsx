@@ -2,7 +2,8 @@ import React from 'react'
 import DialogItem from './DialogItem/DialogItem'
 import "./Dialogs.css"
 import DialogMan from './DialogMan/DialogMan'
-import { AddMessageActionCreator} from '../../redux/state'
+import { AddMessageActionCreator } from '../../redux/DialogsPageReducer'
+
 
 
 
