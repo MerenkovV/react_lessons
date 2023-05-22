@@ -3,7 +3,7 @@ import './css/App.css';
 //import './css/style.css';
 import './css/nullstyle.css';
 import Header from './components/Header/Header';
-import Side from './components/Side/Side';
+import SideContainer from './components/Side/SideContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import DialogsContainer from './components/Dialog/DialogsContainer';
@@ -15,10 +15,10 @@ function App(props) {
       <div className="container">
         <div className="grid">
           <Header />
-          <Side state={props.store.getState().sidebar}/>
+          <SideContainer/>
           <Routes>
-            <Route path='/dialogs/*' element={<DialogsContainer store={props.store}/>} />
-            <Route path='/profile/*' element={<ProfileContainer store={props.store}/>} />
+            <Route path='/dialogs/*' element={<DialogsContainer/>} />
+            <Route path='/profile/*' element={<ProfileContainer/>} />
           </Routes>
         </div>
       </div>
