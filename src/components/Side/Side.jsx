@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import Friend from './Friend/Friend';
 
 export default function Side(props) {
+
   let FriendSet = props.friends.map( friend => <Friend name={friend.name}/>);
   
   return (
@@ -16,7 +17,7 @@ export default function Side(props) {
         <li><a href="#">Settings</a></li>
       </ul>
       <div className="side__friends">
-        <h2 className="side__hightext">Friends</h2>
+        <NavLink to="/friends" className="side__hightext">Friends</NavLink>
         <div className="side__friend">
           {FriendSet}
         </div>

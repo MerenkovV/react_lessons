@@ -7,7 +7,7 @@ import SideContainer from './components/Side/SideContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import DialogsContainer from './components/Dialog/DialogsContainer';
-
+import FriendsContainer from './components/Friends/FriendsContainer';
 
 function App() {
   return (
@@ -19,6 +19,7 @@ function App() {
           <Routes>
             <Route path='/dialogs/*' element={<DialogsContainer/>} />
             <Route path='/profile/*' element={<ProfileContainer/>} />
+            <Route path='/friends/*' element={<FriendsContainer/>} />
           </Routes>
         </div>
       </div>

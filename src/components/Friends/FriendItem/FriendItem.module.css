@@ -1,0 +1,103 @@
+.friendItem{
+    display: flex;
+    padding-right: 20px;
+    margin-bottom: 30px;
+}
+
+.left{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 90px;
+}
+
+.image{
+    height: 60px;
+    width: 60px;
+    background: url(https://abrakadabra.fun/uploads/posts/2021-12/thumbs/1640716800_55-abrakadabra-fun-p-smail-cherno-belii-56.jpg) center/cover no-repeat;
+}
+
+.follow{
+    margin-top: 10px;
+    font-size: 18px;
+    padding: 3px 8px;
+    background: #7abd69;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    transition-duration: 200ms;
+    box-shadow: 0 0 10px 1px rgb(169, 205, 166);
+}
+
+.follow:hover{
+    box-shadow: 0 0 15px 2px rgb(180, 218, 175);
+    background: #87d174;
+}
+
+.right{
+    flex: 1 0 auto;
+    display: flex;
+    justify-content: space-between;
+    border: 2px solid rgb(182, 182, 182);
+    border-radius: 20px;
+    padding: 10px;
+    max-width: 87%;
+}
+
+.namespace{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 0 0 50%;
+}
+
+.namespace p{
+    max-width: 100%;
+}
+
+.name{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: rgb(88, 88, 88);
+}
+
+.about{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: rgb(88, 88, 88);
+}
+
+.place{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: end;
+    flex: 0 0 50%;
+}
+
+.place p{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: rgb(88, 88, 88);
+    max-width: 100%;
+    text-align: right;
+}
+
+.unfollow{
+    margin-top: 10px;
+    font-size: 15px;
+    padding: 4px 5px;
+    background: #bd6969;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    transition-duration: 200ms;
+    box-shadow: 0 0 10px 1px rgb(205, 166, 166);
+}
+
+.unfollow:hover{
+    box-shadow: 0 0 15px 2px rgb(218, 175, 175);
+    background: #d17474;
+}
