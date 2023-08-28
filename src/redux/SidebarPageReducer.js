@@ -46,7 +46,6 @@ const SidebarPageReducer = (state = initialState, action) => {
                 stateCopy.friends.push({id:friend.id , name:friend.name })
             }
         });
-        debugger
         return stateCopy;
     }
     return state;

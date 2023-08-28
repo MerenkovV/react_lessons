@@ -2,9 +2,10 @@ import React from 'react'
 import module from "./FriendItem.module.css"
 
 export default function FriendItem(props) {
-
+    
     const onFollowClick = () => {
         props.ChangeFollow(props.follow, props.id, props.name)
+        
     };
 
     return (
