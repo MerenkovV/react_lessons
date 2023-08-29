@@ -5,17 +5,12 @@ import axios from 'axios';
 
 class Friends extends React.Component {
 
-    constructor(props) {
-        super(props)
-        if(this.props.friends.length === 0){
-            axios.get('https://social-network.samuraijs.com/api/1.0/users', {
-                params: {
-                    count: 10
-                }
-            }).then((info) => {
+    componentDidMount() {
+        
+        axios.get('https://social-network.samuraijs.com/api/1.0/users')
+            .then((info) => {
                 this.props.SetUsers(info.data.items);
             });
-        }
     }
 
     render() {
