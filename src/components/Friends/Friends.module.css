@@ -17,3 +17,16 @@
     overflow-y: scroll;
 }
 
+.list span{
+    font-size: 20px;
+    padding-right: 5px;
+    cursor: pointer;
+}
+
+.list span:hover{
+    text-shadow: 0px 0px 15px rgb(79, 79, 79);
+}
+
+.current {
+    font-weight: bold;
+}

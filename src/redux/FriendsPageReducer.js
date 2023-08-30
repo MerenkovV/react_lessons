@@ -10,7 +10,10 @@
 // };
 
 let initialState = {
-    friends: []
+    friends: [],
+    pageSize: 6,
+    totalUsersCount: 0,
+    currentPage: 1
 };
 
 
@@ -39,11 +42,31 @@ export const AddUsersActionCreator = (newState) => {
     )
 };
 
+export const GetTotalUsersCountActionCreator = (count) => {
+    return (
+        {
+            type: "GET_TOTAL_USERS_COUNT",
+            payload: {
+                count: count
+            }
+        }
+    )
+};
+
+export const ChangePageActionCreator = (newPage) => {
+    return (
+        {
+            type: "CHANGE_PAGE",
+            payload: {
+                newPage: newPage
+            }
+        }
+    )
+};
+
 export const SetUsersActionCreator = (newFriends) => {
     let newState = {
-        friends: [
-            ...newFriends
-        ]
+        friends: newFriends
     }
     return (
         {
@@ -56,7 +79,6 @@ export const SetUsersActionCreator = (newFriends) => {
 };
 
 const FriendPageReducer = (state = initialState, action) => {
-
 
     
     if (action.type === "FOLLOW_FRIEND") {
@@ -77,6 +99,16 @@ const FriendPageReducer = (state = initialState, action) => {
         return {
             ...state,
             friends: action.payload.newState.friends,
+        }
+    }else if(action.type === "GET_TOTAL_USERS_COUNT"){
+        return {
+            ...state,
+            totalUsersCount: action.payload.count,
+        }
+    }else if(action.type === "CHANGE_PAGE"){
+        return {
+            ...state,
+            currentPage: action.payload.newPage,
         }
     }
     return state;
