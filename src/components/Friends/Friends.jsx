@@ -3,7 +3,6 @@ import module from "./Friends.module.css";
 
 export default function Friends(props) {
     
-
     return (
         <main className={module.main}>
             <h2 className={module.main__header}>Friends</h2>

@@ -13,7 +13,8 @@ let initialState = {
     friends: [],
     pageSize: 6,
     totalUsersCount: 0,
-    currentPage: 1
+    currentPage: 1,
+    isFetching: false
 };
 
 
@@ -64,6 +65,17 @@ export const ChangePageActionCreator = (newPage) => {
     )
 };
 
+export const PreloaderActionCreator = (fetch) => {
+    return (
+        {
+            type: "FETCH_PRELOADER",
+            payload: {
+                fetch: fetch
+            }
+        }
+    )
+};
+
 export const SetUsersActionCreator = (newFriends) => {
     let newState = {
         friends: newFriends
@@ -109,6 +121,11 @@ const FriendPageReducer = (state = initialState, action) => {
         return {
             ...state,
             currentPage: action.payload.newPage,
+        }
+    }else if(action.type === "FETCH_PRELOADER"){
+        return {
+            ...state,
+            isFetching: action.payload.fetch,
         }
     }
     return state;
