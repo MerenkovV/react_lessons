@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { AddUsersActionCreator, ChangePageActionCreator, FollowFriendActionCreator, GetTotalUsersCountActionCreator, PreloaderActionCreator, SetUsersActionCreator } from '../../redux/FriendsPageReducer';
-import { DeleteFriendActionCreator, AddFriendActionCreator } from '../../redux/SidebarPageReducer';
+import { AddUsers, ChangePage, ChangeFollow, GetUsersCount, FetchPreloader, SetUsers } from '../../redux/FriendsPageReducer';
+import { ChangeFriend } from '../../redux/SidebarPageReducer';
 import axios from 'axios';
 import Friends from './Friends';
 import FriendItem from './FriendItem/FriendItem';
@@ -36,7 +36,7 @@ class FriendsAPI extends React.Component {
             <>
             {this.props.isFetching ? 
             <img style={{width: "97px", height: "97px", marginBottom:"30px"}} src={preloader}/> : 
-            <FriendItem ChangeFollow={this.props.ChangeFollow} follow={friend.followed} id={friend.id} name={friend.name} about={friend.about} country={friend.country} city={friend.city} />}
+            <FriendItem ChangeFollow={this.props.ChangeFollow} ChangeFriend={this.props.ChangeFriend} follow={friend.followed} id={friend.id} name={friend.name} about={friend.about} country={friend.country} city={friend.city} />}
             
             </>
             );
@@ -65,35 +65,43 @@ let mapStateToProps = (state) => {
     }
 };
 
-let mapDispatchToProps = (dispatch) => {
-    return {
-        ChangeFollow: (isFollow, id, name) => {
+// let mapDispatchToProps = (dispatch) => {
+//     return {
+//         ChangeFollow: (isFollow, id, name) => {
 
-            dispatch(FollowFriendActionCreator(isFollow, id));
-            if (isFollow) {
-                dispatch(DeleteFriendActionCreator(name, id));
-            } else {
-                dispatch(AddFriendActionCreator(name, id));
-            }
-        },
-        AddUsers: (newState) => {
-            dispatch(AddUsersActionCreator(newState))
-        },
-        SetUsers: (newFriends) => {
-            dispatch(SetUsersActionCreator(newFriends))
-        },
-        GetUsersCount: (count) => {
-            dispatch(GetTotalUsersCountActionCreator(count))
-        },
-        ChangePage: (newPage) => {
-            dispatch(ChangePageActionCreator(newPage))
-        },
-        FetchPreloader: (isFetching) => {
-            dispatch(PreloaderActionCreator(isFetching))
-        }
-    }
-};
+//             dispatch(FollowFriendActionCreator(isFollow, id));
+//             if (isFollow) {
+//                 dispatch(DeleteFriendActionCreator(name, id));
+//             } else {
+//                 dispatch(AddFriendActionCreator(name, id));
+//             }
+//         },
+//         AddUsers: (newState) => {
+//             dispatch(AddUsersActionCreator(newState))
+//         },
+//         SetUsers: (newFriends) => {
+//             dispatch(SetUsersActionCreator(newFriends))
+//         },
+//         GetUsersCount: (count) => {
+//             dispatch(GetTotalUsersCountActionCreator(count))
+//         },
+//         ChangePage: (newPage) => {
+//             dispatch(ChangePageActionCreator(newPage))
+//         },
+//         FetchPreloader: (isFetching) => {
+//             dispatch(PreloaderActionCreator(isFetching))
+//         }
+//     }
+// };
 
-const FriendItemContainer = connect(mapStateToProps, mapDispatchToProps)(FriendsAPI);
+const FriendItemContainer = connect(mapStateToProps, {
+    ChangeFollow,
+    AddUsers,
+    SetUsers,
+    GetUsersCount,
+    ChangePage,
+    FetchPreloader,
+    ChangeFriend
+})(FriendsAPI);
 
 export default FriendItemContainer;

@@ -6,19 +6,16 @@ let initialState = {
     ]
 };
 
-export const AddFriendActionCreator = (Name, id) => {
+export const ChangeFriend = (follow, Name, id) => {
     return (
+        !follow?
         {
             type: "ADD_FRIEND",
             payload: {
                 Name: Name,
                 id: id,
             }
-        }
-    )
-};
-export const DeleteFriendActionCreator = (Name, id) => {
-    return (
+        }:
         {
             type: "DELETE_FRIEND",
             payload: {
@@ -26,6 +23,7 @@ export const DeleteFriendActionCreator = (Name, id) => {
                 id: id,
             }
         }
+        
     )
 };
 

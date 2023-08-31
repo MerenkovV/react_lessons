@@ -20,7 +20,7 @@ let initialState = {
 
 
 
-export const FollowFriendActionCreator = (isFollow, id) => {
+export const ChangeFollow = (isFollow, id) => {
     return (
         {
             type: "FOLLOW_FRIEND",
@@ -32,7 +32,7 @@ export const FollowFriendActionCreator = (isFollow, id) => {
     )
 };
 
-export const AddUsersActionCreator = (newState) => {
+export const AddUsers = (newState) => {
     return (
         {
             type: "ADD_USERS",
@@ -43,7 +43,7 @@ export const AddUsersActionCreator = (newState) => {
     )
 };
 
-export const GetTotalUsersCountActionCreator = (count) => {
+export const GetUsersCount = (count) => {
     return (
         {
             type: "GET_TOTAL_USERS_COUNT",
@@ -54,7 +54,7 @@ export const GetTotalUsersCountActionCreator = (count) => {
     )
 };
 
-export const ChangePageActionCreator = (newPage) => {
+export const ChangePage = (newPage) => {
     return (
         {
             type: "CHANGE_PAGE",
@@ -65,7 +65,7 @@ export const ChangePageActionCreator = (newPage) => {
     )
 };
 
-export const PreloaderActionCreator = (fetch) => {
+export const FetchPreloader = (fetch) => {
     return (
         {
             type: "FETCH_PRELOADER",
@@ -76,7 +76,7 @@ export const PreloaderActionCreator = (fetch) => {
     )
 };
 
-export const SetUsersActionCreator = (newFriends) => {
+export const SetUsers = (newFriends) => {
     let newState = {
         friends: newFriends
     }

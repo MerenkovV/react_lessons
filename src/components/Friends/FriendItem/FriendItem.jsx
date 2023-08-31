@@ -5,7 +5,7 @@ export default function FriendItem(props) {
     
     const onFollowClick = () => {
         props.ChangeFollow(props.follow, props.id, props.name)
-        
+        props.ChangeFriend(props.follow, props.name, props.id)
     };
 
     return (
