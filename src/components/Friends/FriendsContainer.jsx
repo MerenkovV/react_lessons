@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { AddUsers, ChangePage, ChangeFollow, GetUsersCount, FetchPreloader, SetUsers } from '../../redux/FriendsPageReducer';
 import { ChangeFriend } from '../../redux/SidebarPageReducer';
+import {ChangeId} from '../../redux/ProfilePageReducer'
 import axios from 'axios';
 import Friends from './Friends';
 import FriendItem from './FriendItem/FriendItem';
@@ -10,10 +11,8 @@ import preloader from './../../image/Spinner.svg';
 class FriendsAPI extends React.Component {
 
     componentDidMount() {
-
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
             .then((info) => {
-
                 this.props.SetUsers(info.data.items);
                 this.props.GetUsersCount(info.data.totalCount)
             });
@@ -36,21 +35,23 @@ class FriendsAPI extends React.Component {
             <>
             {this.props.isFetching ? 
             <img style={{width: "97px", height: "97px", marginBottom:"30px"}} src={preloader}/> : 
-            <FriendItem ChangeFollow={this.props.ChangeFollow} ChangeFriend={this.props.ChangeFriend} follow={friend.followed} id={friend.id} name={friend.name} about={friend.about} country={friend.country} city={friend.city} />}
+            <FriendItem ChangeId={this.props.ChangeId} ChangeFollow={this.props.ChangeFollow} ChangeFriend={this.props.ChangeFriend} info={friend} />}
             
             </>
             );
         });
     
-        let totalPages = this.props.totalUsersCount / this.props.pageSize;
+        let totalPages = Math.ceil(this.props.totalUsersCount / this.props.pageSize);
     
         let pages = [];
     
-        for(let i = 1; i <= totalPages && i <= 30; i++){
-            pages.push(i);
+        if(this.props.totalUsersCount !== 0){
+            //for(let i = 1; i <= totalPages && i <= 30; i++){
+            for(let i = totalPages - 10; i <= totalPages; i++){   
+                pages.push(i);
+            }
         }
-
-        return <Friends onChangePage={this.onChangePage} currentPage={this.props.currentPage} friendsElements={friendsElements} pages={pages}/>
+        return <Friends isFetching={this.props.isFetching} onChangePage={this.onChangePage} currentPage={this.props.currentPage} friendsElements={friendsElements} pages={pages}/>
         
     }
 }
@@ -65,43 +66,6 @@ let mapStateToProps = (state) => {
     }
 };
 
-// let mapDispatchToProps = (dispatch) => {
-//     return {
-//         ChangeFollow: (isFollow, id, name) => {
-
-//             dispatch(FollowFriendActionCreator(isFollow, id));
-//             if (isFollow) {
-//                 dispatch(DeleteFriendActionCreator(name, id));
-//             } else {
-//                 dispatch(AddFriendActionCreator(name, id));
-//             }
-//         },
-//         AddUsers: (newState) => {
-//             dispatch(AddUsersActionCreator(newState))
-//         },
-//         SetUsers: (newFriends) => {
-//             dispatch(SetUsersActionCreator(newFriends))
-//         },
-//         GetUsersCount: (count) => {
-//             dispatch(GetTotalUsersCountActionCreator(count))
-//         },
-//         ChangePage: (newPage) => {
-//             dispatch(ChangePageActionCreator(newPage))
-//         },
-//         FetchPreloader: (isFetching) => {
-//             dispatch(PreloaderActionCreator(isFetching))
-//         }
-//     }
-// };
-
-const FriendItemContainer = connect(mapStateToProps, {
-    ChangeFollow,
-    AddUsers,
-    SetUsers,
-    GetUsersCount,
-    ChangePage,
-    FetchPreloader,
-    ChangeFriend
-})(FriendsAPI);
-
+const FriendItemContainer = connect(mapStateToProps, {ChangeFollow, AddUsers, SetUsers, GetUsersCount,
+    ChangePage, FetchPreloader, ChangeFriend, ChangeId })(FriendsAPI);
 export default FriendItemContainer;

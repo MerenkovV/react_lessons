@@ -8,6 +8,7 @@ export default function Friends(props) {
             <h2 className={module.main__header}>Friends</h2>
             <div className={module.list}>
                 {
+                    props.isFetching ? null : 
                     props.pages.map((p)=>{
                         return <span onClick={()=>{props.onChangePage(p)}} className={props.currentPage === p && module.current}>{p}</span>
                     })

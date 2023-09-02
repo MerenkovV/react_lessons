@@ -70,7 +70,7 @@ export const FetchPreloader = (fetch) => {
         {
             type: "FETCH_PRELOADER",
             payload: {
-                fetch: fetch
+                fetch
             }
         }
     )
@@ -102,7 +102,6 @@ const FriendPageReducer = (state = initialState, action) => {
                 
             }
         });
-        
         return {
             ...state,
             friends: friendsCopy,

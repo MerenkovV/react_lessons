@@ -1,14 +1,13 @@
 import React from 'react';
 import "./Profile.css";
 import Post from './Post/Post';
-
+import fetch from '../../image/Spinner.svg'
 
 
 
 export default function Profile(props) {
-
     let TextElement = React.createRef();
-
+    debugger
     const onSendMes = () => {
         let text = TextElement.current.value;
         props.SendMes(text);
@@ -22,16 +21,18 @@ export default function Profile(props) {
                 <div className="main__profile-head"></div>
             </div>
             <div className="main__profile">
-                <div className="main__profile-image"></div>
+                <img src={props.isFetching ? fetch : props.info.photos.large} className="main__profile-image"></img>
+                {props.isFetching ? null :
                 <div className="main__profile-content">
-                    <h2 className="main__profile-name high-text">Vladislav M.</h2>
+                    <h2 className="main__profile-name high-text">{props.info.fullName}</h2>
                     <span className="main__profile-info">
-                        <p>Date of birth: 02 july</p>
-                        <p>City: Tomsk</p>
-                        <p>Education: TPU</p>
-                        <p>WebSite: <a target='_blank' href="https://github.com/MerenkovV">MerenkovV</a></p>
+                        <p>About Me: {props.info.aboutMe}</p>
+                        <p>{props.info.lookingForAJob ? "Ищу работу" : "Не ищу работу"}</p>
+                        <p>О работе: {props.info.lookingForAJobDescription}</p>
+                        <p>WebSite: <a target='_blank' href={props.info.contacts.github}>GitHub</a></p>
                     </span>
                 </div>
+                }
             </div>
             <div className="main__posts">
                 <h2 className="main__post-header high-text">My Posts</h2>

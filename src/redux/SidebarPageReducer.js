@@ -1,26 +1,26 @@
 let initialState = {
     friends: [
-        {id: 1, name: "Vlados" },
-        {id: 3, name: "Alex" },
-        {id: 4, name: "Rustam" },
+        {id: 29272, name: "Vlados", picture: null },
+        {id: 2, name: "Alex", picture: null },
+        {id: -1, name: "Rustam", picture: null },
     ]
 };
 
-export const ChangeFriend = (follow, Name, id) => {
+export const ChangeFriend = (follow, Name, id, picture) => {
     return (
         !follow?
         {
             type: "ADD_FRIEND",
             payload: {
-                Name: Name,
-                id: id,
+                Name,
+                id,
+                picture
             }
         }:
         {
             type: "DELETE_FRIEND",
             payload: {
-                Name: Name,
-                id: id,
+                id
             }
         }
         
@@ -31,7 +31,7 @@ const SidebarPageReducer = (state = initialState, action) => {
     if (action.type === "ADD_FRIEND") {
         return {
             ...state,
-            friends: [...state.friends, {name: action.payload.Name, id: action.payload.id}]
+            friends: [...state.friends, {name: action.payload.Name, id: action.payload.id, picture: action.payload.picture}]
         }
     }
     if (action.type === "DELETE_FRIEND") {
@@ -41,7 +41,7 @@ const SidebarPageReducer = (state = initialState, action) => {
         stateCopy.friends = [];
         state.friends.map(friend=>{
             if(action.payload.id !== friend.id){
-                stateCopy.friends.push({id:friend.id , name:friend.name })
+                stateCopy.friends.push({id:friend.id , name:friend.name, picture: action.payload.picture})
             }
         });
         return stateCopy;
