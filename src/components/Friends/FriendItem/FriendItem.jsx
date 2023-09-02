@@ -1,22 +1,22 @@
 import React from 'react'
 import module from "./FriendItem.module.css"
 import { NavLink } from 'react-router-dom';
-import axios from 'axios';
+import { apiFunctions } from '../../../api/api';
 
 export default function FriendItem(props) {
     const onFollowClick = () => {
         if (props.info.followed == false) {
-            axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${props.info.id}`, {}, { withCredentials: true })
-                .then((info) => {
-                    if(info.data.resultCode == 0){
+            apiFunctions.addFollow(props.info.id)
+                .then((data) => {
+                    if(data.resultCode == 0){
                         props.ChangeFriend(props.info.followed, props.info.name, props.info.id, props.info.photos.small)
                         props.ChangeFollow(props.info.followed, props.info.id, props.info.name)
                     }
                 });
         }else{
-            axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${props.info.id}`, { withCredentials: true })
-                .then((info) => {
-                    if(info.data.resultCode == 0){
+            apiFunctions.deleteFollow(props.info.id)
+                .then((data) => {
+                    if(data.resultCode == 0){
                         props.ChangeFriend(props.info.followed, props.info.name, props.info.id, props.info.photos.small)
                         props.ChangeFollow(props.info.followed, props.info.id, props.info.name)
                     }

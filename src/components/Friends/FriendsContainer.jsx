@@ -3,28 +3,28 @@ import { connect } from 'react-redux'
 import { AddUsers, ChangePage, ChangeFollow, GetUsersCount, FetchPreloader, SetUsers } from '../../redux/FriendsPageReducer';
 import { ChangeFriend } from '../../redux/SidebarPageReducer';
 import {ChangeId} from '../../redux/ProfilePageReducer'
-import axios from 'axios';
 import Friends from './Friends';
 import FriendItem from './FriendItem/FriendItem';
 import preloader from './../../image/Spinner.svg';
+import { apiFunctions } from '../../api/api';
 
 class FriendsAPI extends React.Component {
 
     componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {withCredentials: true})
-            .then((info) => {
-                this.props.SetUsers(info.data.items);
-                this.props.GetUsersCount(info.data.totalCount)
+        apiFunctions.getUsers(this.props.currentPage, this.props.pageSize)
+            .then((data) => {
+                this.props.SetUsers(data.items);
+                this.props.GetUsersCount(data.totalCount)
             });
     }
 
     onChangePage = (newPage) => {
         this.props.ChangePage(newPage);
         this.props.FetchPreloader(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${newPage}&count=${this.props.pageSize}`, {withCredentials: true})
-            .then((info) => {
-                this.props.SetUsers(info.data.items);
-                this.props.GetUsersCount(info.data.totalCount)
+        apiFunctions.getUsers(newPage, this.props.pageSize)
+            .then((data) => {
+                this.props.SetUsers(data.items);
+                this.props.GetUsersCount(data.totalCount)
                 this.props.FetchPreloader(false)
             });
     }
