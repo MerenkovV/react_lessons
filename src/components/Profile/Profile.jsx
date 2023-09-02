@@ -7,7 +7,6 @@ import fetch from '../../image/Spinner.svg'
 
 export default function Profile(props) {
     let TextElement = React.createRef();
-    debugger
     const onSendMes = () => {
         let text = TextElement.current.value;
         props.SendMes(text);

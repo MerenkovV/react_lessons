@@ -11,7 +11,7 @@ import preloader from './../../image/Spinner.svg';
 class FriendsAPI extends React.Component {
 
     componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {withCredentials: true})
             .then((info) => {
                 this.props.SetUsers(info.data.items);
                 this.props.GetUsersCount(info.data.totalCount)
@@ -21,7 +21,7 @@ class FriendsAPI extends React.Component {
     onChangePage = (newPage) => {
         this.props.ChangePage(newPage);
         this.props.FetchPreloader(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${newPage}&count=${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${newPage}&count=${this.props.pageSize}`, {withCredentials: true})
             .then((info) => {
                 this.props.SetUsers(info.data.items);
                 this.props.GetUsersCount(info.data.totalCount)
