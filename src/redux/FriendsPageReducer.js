@@ -14,7 +14,8 @@ let initialState = {
     pageSize: 6,
     totalUsersCount: 0,
     currentPage: 1,
-    isFetching: false
+    isFetching: false,
+    isFollowing: []
 };
 
 
@@ -76,6 +77,16 @@ export const FetchPreloader = (fetch) => {
     )
 };
 
+export const LoadFollow = (isFollowing, id) => {
+    return (
+        {
+            type: "FOLLOW_LOAD",
+            isFollowing,
+            id
+        }
+    )
+};
+
 export const SetUsers = (newFriends) => {
     let newState = {
         friends: newFriends
@@ -125,6 +136,13 @@ const FriendPageReducer = (state = initialState, action) => {
         return {
             ...state,
             isFetching: action.payload.fetch,
+        }
+    }else if(action.type === "FOLLOW_LOAD"){
+        return {
+            ...state,
+            isFollowing: action.isFollowing ?
+            [...state.isFollowing, action.id] :
+            state.isFollowing.filter(id=>id != action.id)
         }
     }
     return state;

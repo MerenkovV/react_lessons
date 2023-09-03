@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { AddUsers, ChangePage, ChangeFollow, GetUsersCount, FetchPreloader, SetUsers } from '../../redux/FriendsPageReducer';
+import { AddUsers, ChangePage, ChangeFollow, GetUsersCount, FetchPreloader, SetUsers, LoadFollow } from '../../redux/FriendsPageReducer';
 import { ChangeFriend } from '../../redux/SidebarPageReducer';
 import {ChangeId} from '../../redux/ProfilePageReducer'
 import Friends from './Friends';
@@ -35,7 +35,7 @@ class FriendsAPI extends React.Component {
             <>
             {this.props.isFetching ? 
             <img style={{width: "97px", height: "97px", marginBottom:"30px"}} src={preloader}/> : 
-            <FriendItem ChangeId={this.props.ChangeId} ChangeFollow={this.props.ChangeFollow} ChangeFriend={this.props.ChangeFriend} info={friend} />}
+            <FriendItem LoadFollow={this.props.LoadFollow} ChangeId={this.props.ChangeId} ChangeFollow={this.props.ChangeFollow} ChangeFriend={this.props.ChangeFriend} info={friend} isFollowing={this.props.isFollowing}/>}
             
             </>
             );
@@ -62,10 +62,11 @@ let mapStateToProps = (state) => {
         pageSize: state.friendsPage.pageSize,
         totalUsersCount: state.friendsPage.totalUsersCount,
         currentPage: state.friendsPage.currentPage,
-        isFetching: state.friendsPage.isFetching
+        isFetching: state.friendsPage.isFetching,
+        isFollowing: state.friendsPage.isFollowing,
     }
 };
 
 const FriendItemContainer = connect(mapStateToProps, {ChangeFollow, AddUsers, SetUsers, GetUsersCount,
-    ChangePage, FetchPreloader, ChangeFriend, ChangeId })(FriendsAPI);
+    ChangePage, FetchPreloader, ChangeFriend, ChangeId, LoadFollow })(FriendsAPI);
 export default FriendItemContainer;

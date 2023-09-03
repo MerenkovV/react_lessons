@@ -5,6 +5,7 @@ import { apiFunctions } from '../../../api/api';
 
 export default function FriendItem(props) {
     const onFollowClick = () => {
+        props.LoadFollow(true, props.info.id)
         if (props.info.followed == false) {
             apiFunctions.addFollow(props.info.id)
                 .then((data) => {
@@ -12,6 +13,7 @@ export default function FriendItem(props) {
                         props.ChangeFriend(props.info.followed, props.info.name, props.info.id, props.info.photos.small)
                         props.ChangeFollow(props.info.followed, props.info.id, props.info.name)
                     }
+                    props.LoadFollow(false, props.info.id)
                 });
         }else{
             apiFunctions.deleteFollow(props.info.id)
@@ -20,6 +22,7 @@ export default function FriendItem(props) {
                         props.ChangeFriend(props.info.followed, props.info.name, props.info.id, props.info.photos.small)
                         props.ChangeFollow(props.info.followed, props.info.id, props.info.name)
                     }
+                    props.LoadFollow(false, props.info.id)
                 });
         }
 
@@ -31,7 +34,7 @@ export default function FriendItem(props) {
                 <img src={!props.info.photos.small ? "https://abrakadabra.fun/uploads/posts/2021-12/thumbs/1640716800_55-abrakadabra-fun-p-smail-cherno-belii-56.jpg" : props.info.photos.small} className={module.image}></img>
                 {
                     props.info.followed ?
-                        <button onClick={onFollowClick} className={module.unfollow}>Unfollow</button> : <button onClick={onFollowClick} className={module.follow}>Follow</button>
+                        <button disabled={props.isFollowing.some(id=>id == props.info.id)} onClick={onFollowClick} className={module.unfollow}>Unfollow</button> : <button disabled={props.isFollowing.some(id=>id == props.info.id)} onClick={onFollowClick} className={module.follow}>Follow</button>
                 }
             </div>
             <div className={module.right}>
