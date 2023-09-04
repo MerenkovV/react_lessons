@@ -1,29 +1,14 @@
 import React from 'react'
 import module from "./FriendItem.module.css"
 import { NavLink } from 'react-router-dom';
-import { apiFunctions } from '../../../api/api';
 
 export default function FriendItem(props) {
     const onFollowClick = () => {
-        props.LoadFollow(true, props.info.id)
+        
         if (props.info.followed == false) {
-            apiFunctions.addFollow(props.info.id)
-                .then((data) => {
-                    if(data.resultCode == 0){
-                        props.ChangeFriend(props.info.followed, props.info.name, props.info.id, props.info.photos.small)
-                        props.ChangeFollow(props.info.followed, props.info.id, props.info.name)
-                    }
-                    props.LoadFollow(false, props.info.id)
-                });
+            props.addUserFollow(props.info.followed, props.info.name, props.info.id, props.info.photos.small)
         }else{
-            apiFunctions.deleteFollow(props.info.id)
-                .then((data) => {
-                    if(data.resultCode == 0){
-                        props.ChangeFriend(props.info.followed, props.info.name, props.info.id, props.info.photos.small)
-                        props.ChangeFollow(props.info.followed, props.info.id, props.info.name)
-                    }
-                    props.LoadFollow(false, props.info.id)
-                });
+            props.delUserFollow(props.info.followed, props.info.name, props.info.id, props.info.photos.small)
         }
 
     };

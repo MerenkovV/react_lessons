@@ -1,3 +1,5 @@
+import { apiFunctions } from "../api/api";
+
 let initialState = {
     info: {
         fullName: "Vladislav M.",
@@ -24,7 +26,7 @@ let initialState = {
 };
 
 export const SendMes = (text) => {
-    return(
+    return (
         {
             type: "ADD-POST",
             PostMessage: text,
@@ -42,7 +44,7 @@ export const Preloader = (fetch) => {
 };
 
 export const ChangeId = (id) => {
-    return(
+    return (
         {
             type: "CHANGE-ID",
             id,
@@ -51,13 +53,15 @@ export const ChangeId = (id) => {
 };
 
 export const LoadProfile = (NewProfile) => {
-    if(!NewProfile) {return(
-        {
-            type: "LOAD-PROFILE",
-            NewProfile: initialState.info
-        }
-    )}
-    return(
+    if (!NewProfile) {
+        return (
+            {
+                type: "LOAD-PROFILE",
+                NewProfile: initialState.info
+            }
+        )
+    }
+    return (
         {
             type: "LOAD-PROFILE",
             NewProfile
@@ -70,19 +74,19 @@ const ProfilePageReducer = (state = initialState, action) => {
     if (action.type === "ADD-POST") {
         return {
             ...state,
-            posts: [...state.posts, {text: action.PostMessage,likes: 1}]
+            posts: [...state.posts, { text: action.PostMessage, likes: 1 }]
         }
-    }else if(action.type === "LOAD-PROFILE"){
-        return{
+    } else if (action.type === "LOAD-PROFILE") {
+        return {
             ...state,
             info: action.NewProfile
         }
-    }else if(action.type === "CHANGE-ID"){
-        return{
+    } else if (action.type === "CHANGE-ID") {
+        return {
             ...state,
             id: action.id
         }
-    }else if(action.type === "PRELOADER"){
+    } else if (action.type === "PRELOADER") {
         return {
             ...state,
             isFetching: action.fetch,
@@ -91,5 +95,21 @@ const ProfilePageReducer = (state = initialState, action) => {
 
     return state;
 };
+
+export const loadUserProfile = (id) => {
+    return (dispatch) => {
+        if (!id) {
+            dispatch(LoadProfile(null))
+        } else {
+            dispatch(Preloader(true));
+            apiFunctions.getProfile(id)
+                .then((data) => {
+                    dispatch(LoadProfile(data))
+                    dispatch(Preloader(false));
+                });
+        }
+
+    }
+}
 
 export default ProfilePageReducer;

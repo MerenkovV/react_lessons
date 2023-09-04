@@ -1,3 +1,5 @@
+import { apiFunctions } from "../api/api";
+
 let initialState = {
     userId: null,
     login: null,
@@ -25,4 +27,19 @@ export default function authReducer(state = initialState, action) {
     }
 
     return state
+}
+
+export const authCheck = () => {
+    return (dispatch) => {
+        apiFunctions.getAuth()
+            .then((data) => {
+                let userData = {
+                    id: data.id,
+                    login: data.login,
+                    email: data.email,
+                    isAuthorized: true
+                }
+                dispatch(SetUserData(userData))
+            });
+    }
 }

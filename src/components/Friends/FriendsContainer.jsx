@@ -1,41 +1,28 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { AddUsers, ChangePage, ChangeFollow, GetUsersCount, FetchPreloader, SetUsers, LoadFollow } from '../../redux/FriendsPageReducer';
-import { ChangeFriend } from '../../redux/SidebarPageReducer';
+import { AddUsers, GetUsersCount, SetUsers, delUserFollow, getPage, addUserFollow } from '../../redux/FriendsPageReducer';
 import {ChangeId} from '../../redux/ProfilePageReducer'
 import Friends from './Friends';
 import FriendItem from './FriendItem/FriendItem';
 import preloader from './../../image/Spinner.svg';
-import { apiFunctions } from '../../api/api';
 
 class FriendsAPI extends React.Component {
 
     componentDidMount() {
-        apiFunctions.getUsers(this.props.currentPage, this.props.pageSize)
-            .then((data) => {
-                this.props.SetUsers(data.items);
-                this.props.GetUsersCount(data.totalCount)
-            });
+        this.props.getPage(this.props.currentPage, this.props.pageSize)
     }
 
     onChangePage = (newPage) => {
-        this.props.ChangePage(newPage);
-        this.props.FetchPreloader(true)
-        apiFunctions.getUsers(newPage, this.props.pageSize)
-            .then((data) => {
-                this.props.SetUsers(data.items);
-                this.props.GetUsersCount(data.totalCount)
-                this.props.FetchPreloader(false)
-            });
+        this.props.getPage(newPage, this.props.pageSize)
     }
 
     render() {
-        let friendsElements = this.props.friends.map((friend, index) => {
+        let friendsElements = this.props.friends.map((friend) => {
             return (
             <>
             {this.props.isFetching ? 
             <img style={{width: "97px", height: "97px", marginBottom:"30px"}} src={preloader}/> : 
-            <FriendItem LoadFollow={this.props.LoadFollow} ChangeId={this.props.ChangeId} ChangeFollow={this.props.ChangeFollow} ChangeFriend={this.props.ChangeFriend} info={friend} isFollowing={this.props.isFollowing}/>}
+            <FriendItem addUserFollow={this.props.addUserFollow} ChangeId={this.props.ChangeId} delUserFollow={this.props.delUserFollow} info={friend} isFollowing={this.props.isFollowing}/>}
             
             </>
             );
@@ -67,6 +54,6 @@ let mapStateToProps = (state) => {
     }
 };
 
-const FriendItemContainer = connect(mapStateToProps, {ChangeFollow, AddUsers, SetUsers, GetUsersCount,
-    ChangePage, FetchPreloader, ChangeFriend, ChangeId, LoadFollow })(FriendsAPI);
+const FriendItemContainer = connect(mapStateToProps, {AddUsers, SetUsers, GetUsersCount, ChangeId, 
+    getPage, addUserFollow, delUserFollow })(FriendsAPI);
 export default FriendItemContainer;

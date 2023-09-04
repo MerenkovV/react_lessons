@@ -1,4 +1,5 @@
 
+
 // let initialState = {
 //     friends: [
 //         {name: "Vlados",iter: 1, about: "I study React and Redux", country: "Russia", city: "Tomsk", follow: true },
@@ -8,6 +9,9 @@
 //         { iter: 5, name: "Denis", about: "Do you want a rostelecom card?", country: "Russia", city: "Tomsk", follow: false },
 //     ],
 // };
+
+import { apiFunctions } from "../api/api";
+import { ChangeFriend } from "./SidebarPageReducer";
 
 let initialState = {
     friends: [],
@@ -103,49 +107,90 @@ export const SetUsers = (newFriends) => {
 
 const FriendPageReducer = (state = initialState, action) => {
 
-    
+
     if (action.type === "FOLLOW_FRIEND") {
         let friendsCopy = [...state.friends];
-        
+
         state.friends.map((friend, index) => {
             if (friend.id === action.payload.id) {
                 friendsCopy[index].followed = action.payload.Follow;
-                
+
             }
         });
         return {
             ...state,
             friends: friendsCopy,
         }
-    }else if(action.type === "ADD_USERS"){
+    } else if (action.type === "ADD_USERS") {
         return {
             ...state,
             friends: action.payload.newState.friends,
         }
-    }else if(action.type === "GET_TOTAL_USERS_COUNT"){
+    } else if (action.type === "GET_TOTAL_USERS_COUNT") {
         return {
             ...state,
             totalUsersCount: action.payload.count,
         }
-    }else if(action.type === "CHANGE_PAGE"){
+    } else if (action.type === "CHANGE_PAGE") {
         return {
             ...state,
             currentPage: action.payload.newPage,
         }
-    }else if(action.type === "FETCH_PRELOADER"){
+    } else if (action.type === "FETCH_PRELOADER") {
         return {
             ...state,
             isFetching: action.payload.fetch,
         }
-    }else if(action.type === "FOLLOW_LOAD"){
+    } else if (action.type === "FOLLOW_LOAD") {
         return {
             ...state,
             isFollowing: action.isFollowing ?
-            [...state.isFollowing, action.id] :
-            state.isFollowing.filter(id=>id != action.id)
+                [...state.isFollowing, action.id] :
+                state.isFollowing.filter(id => id != action.id)
         }
     }
     return state;
 };
+
+export const getPage = (newPage, pageSize) => {
+    return (dispatch) => {
+        dispatch(ChangePage(newPage));
+        dispatch(FetchPreloader(true))
+        apiFunctions.getUsers(newPage, pageSize)
+            .then((data) => {
+                dispatch(SetUsers(data.items));
+                dispatch(GetUsersCount(data.totalCount))
+                dispatch(FetchPreloader(false))
+            });
+    }
+}
+
+export const addUserFollow = (followed, name, id, photo) => {
+    return (dispatch) => {
+        dispatch(LoadFollow(true, id))
+            apiFunctions.addFollow(id)
+                .then((data) => {
+                    if(data.resultCode == 0){
+                        dispatch(ChangeFriend(followed, name, id, photo))
+                        dispatch(ChangeFollow(followed, id, name))
+                    }
+                    dispatch(LoadFollow(false, id))
+                });
+    }
+}
+
+export const delUserFollow = (followed, name, id, photo) => {
+    return (dispatch) => {
+        dispatch(LoadFollow(true, id))
+            apiFunctions.deleteFollow(id)
+                .then((data) => {
+                    if(data.resultCode == 0){
+                        dispatch(ChangeFriend(followed, name, id, photo))
+                        dispatch(ChangeFollow(followed, id, name))
+                    }
+                    dispatch(LoadFollow(false, id))
+                });
+    }
+}
 
 export default FriendPageReducer;

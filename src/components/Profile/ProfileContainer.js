@@ -1,21 +1,15 @@
 import React from 'react';
-import { SendMes, LoadProfile, Preloader } from '../../redux/ProfilePageReducer';
+import { SendMes, loadUserProfile } from '../../redux/ProfilePageReducer';
 import Profile from './Profile';
 import { connect } from 'react-redux';
-import { apiFunctions } from '../../api/api';
 
 class ProfileClass extends React.Component{
 
     componentDidMount() {
         if(this.props.id !== 29272){
-            this.props.Preloader(true);
-            apiFunctions.getProfile(this.props.id)
-                .then((data) => {
-                    this.props.LoadProfile(data)
-                    this.props.Preloader(false);
-                });
+            this.props.loadUserProfile(this.props.id)
         }else{
-            this.props.LoadProfile(null)
+            this.props.loadUserProfile(null)
         }
     }
 
@@ -33,6 +27,6 @@ let mapStateToProps = (state) => {
     }
 };
 
-const ProfileContainer = connect(mapStateToProps, {SendMes, LoadProfile, Preloader})(ProfileClass);
+const ProfileContainer = connect(mapStateToProps, {SendMes, loadUserProfile})(ProfileClass);
 
 export default ProfileContainer;
