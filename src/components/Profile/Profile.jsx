@@ -12,7 +12,7 @@ export default function Profile(props) {
         props.SendMes(text);
         TextElement.current.value = "";
     };
-    let postElements = props.posts.map( post => <Post text={post.text} likes={post.likes}/>);
+    let postElements = props.profile.posts.map( post => <Post text={post.text} likes={post.likes}/>);
 
     return (
         <main className="main">
@@ -20,15 +20,15 @@ export default function Profile(props) {
                 <div className="main__profile-head"></div>
             </div>
             <div className="main__profile">
-                <img src={props.isFetching ? fetch : props.info.photos.large} className="main__profile-image"></img>
-                {props.isFetching ? null :
+                <img src={props.profile.isFetching ? fetch : props.profile.info.photos.large} className="main__profile-image"></img>
+                {props.profile.isFetching ? null :
                 <div className="main__profile-content">
-                    <h2 className="main__profile-name high-text">{props.info.fullName}</h2>
+                    <h2 className="main__profile-name high-text">{props.profile.info.fullName}</h2>
                     <span className="main__profile-info">
-                        <p>About Me: {props.info.aboutMe}</p>
-                        <p>{props.info.lookingForAJob ? "Ищу работу" : "Не ищу работу"}</p>
-                        <p>О работе: {props.info.lookingForAJobDescription}</p>
-                        <p>WebSite: <a target='_blank' href={props.info.contacts.github}>GitHub</a></p>
+                        <p>About Me: {props.profile.info.aboutMe}</p>
+                        <p>{props.profile.info.lookingForAJob ? "Ищу работу" : "Не ищу работу"}</p>
+                        <p>О работе: {props.profile.info.lookingForAJobDescription}</p>
+                        <p>WebSite: <a target='_blank' href={props.profile.info.contacts.github}>GitHub</a></p>
                     </span>
                 </div>
                 }

@@ -35,7 +35,7 @@ let initialState = {
   ]
 };
 
-export const AddMessageActionCreator = (Text) => {
+export const AddMess = (Text) => {
     return(
       {
         type: "ADD-MESSAGE",

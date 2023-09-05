@@ -98,7 +98,7 @@ const ProfilePageReducer = (state = initialState, action) => {
 
 export const loadUserProfile = (id) => {
     return (dispatch) => {
-        if (!id) {
+        if (id === 29272) {
             dispatch(LoadProfile(null))
         } else {
             dispatch(Preloader(true));

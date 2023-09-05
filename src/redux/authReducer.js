@@ -8,38 +8,39 @@ let initialState = {
 }
 
 export const SetUserData = (data) => {
-    return(
-      {
-        type: "SET_USER_DATA",
-        data
-      }
+    return (
+        {
+            type: "SET_USER_DATA",
+            data
+        }
     )
 };
 
 export default function authReducer(state = initialState, action) {
 
-    switch(action.type){
+    switch (action.type) {
         case "SET_USER_DATA":
             return {
                 ...state,
                 ...action.data
             }
+        default: return state
     }
-
-    return state
 }
 
 export const authCheck = () => {
     return (dispatch) => {
         apiFunctions.getAuth()
             .then((data) => {
-                let userData = {
-                    id: data.id,
-                    login: data.login,
-                    email: data.email,
-                    isAuthorized: true
+                if (data.resultCode === 0) {
+                    let userData = {
+                        id: data.data.id,
+                        login: data.data.login,
+                        email: data.data.email,
+                        isAuthorized: true
+                    }
+                    dispatch(SetUserData(userData))
                 }
-                dispatch(SetUserData(userData))
             });
     }
 }

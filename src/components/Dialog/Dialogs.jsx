@@ -3,9 +3,6 @@ import DialogItem from './DialogItem/DialogItem'
 import "./Dialogs.css"
 import DialogMan from './DialogMan/DialogMan'
 
-
-
-
 export default function Dialogs(props) {
 
   let TextArea = React.createRef()
@@ -16,8 +13,8 @@ export default function Dialogs(props) {
     TextArea.current.value = "";
   }
 
-  let dialogElements = props.dialogs.map(data => <DialogMan id={data.id} name={data.name} />);
-  let messageElements = props.messages.map(data => <DialogItem name={data.name} text={data.message} />);
+  let dialogElements = props.page.dialogs.map(data => <DialogMan id={data.id} name={data.name} />);
+  let messageElements = props.page.messages.map(data => <DialogItem name={data.name} text={data.message} />);
 
   return (
     <main className="main">

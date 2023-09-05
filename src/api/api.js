@@ -11,7 +11,7 @@ export const apiFunctions = {
         .then(info=>info.data)},
     getAuth() {
         return connection.get(`auth/me`)
-        .then(info=>info.data.data)},
+        .then(info=>info.data)},
     getProfile(id) {
         return connection.get(`profile/${id}`)
         .then(info=>info.data)},

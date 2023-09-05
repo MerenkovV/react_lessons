@@ -2,15 +2,12 @@ import React from 'react';
 import { SendMes, loadUserProfile } from '../../redux/ProfilePageReducer';
 import Profile from './Profile';
 import { connect } from 'react-redux';
+import {withAuth} from '../../hoc/withAuth';
 
 class ProfileClass extends React.Component{
 
     componentDidMount() {
-        if(this.props.id !== 29272){
-            this.props.loadUserProfile(this.props.id)
-        }else{
-            this.props.loadUserProfile(null)
-        }
+            this.props.loadUserProfile(this.props.profile.id)
     }
 
     render(){
@@ -18,15 +15,21 @@ class ProfileClass extends React.Component{
     }
 }
 
-let mapStateToProps = (state) => {
+let ProfileWithAuth = withAuth(ProfileClass)
+
+let mapStateToPropsForRedirect = (state) => {
     return {
-        info: state.profilePage.info,
-        posts: state.profilePage.posts,
-        id: state.profilePage.id,
-        isFetching: state.profilePage.isFetching
+        isAuthorized: state.auth.isAuthorized
     }
 };
 
-const ProfileContainer = connect(mapStateToProps, {SendMes, loadUserProfile})(ProfileClass);
+let mapStateToProps = (state) => {
+    return {
+        profile: state.profilePage,
+    }
+};
+
+const ProfileContainer = connect(mapStateToProps, {SendMes, loadUserProfile})
+(connect(mapStateToPropsForRedirect)(ProfileWithAuth));
 
 export default ProfileContainer;

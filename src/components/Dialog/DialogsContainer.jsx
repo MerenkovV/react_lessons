@@ -1,24 +1,21 @@
-
 import Dialogs from './Dialogs'
-import { AddMessageActionCreator } from '../../redux/DialogsPageReducer'
+import { AddMess } from '../../redux/DialogsPageReducer'
 import { connect } from 'react-redux'
+import { withAuth } from '../../hoc/withAuth';
 
-
-let mapDispatchToProps = (dispatch) => {
+let mapStateToPropsAuth = (state) => {
   return{
-    AddMess: (Text) => {
-      dispatch(AddMessageActionCreator(Text))
-    }
+    isAuthorized: state.auth.isAuthorized
   }
 };
 
 let mapStateToProps = (state) => {
   return{
-    dialogs: state.dialogsPage.dialogs,
-    messages: state.dialogsPage.messages,
+    page: state.dialogsPage,
   }
 };
 
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
+const DialogsContainer = connect(mapStateToProps, {AddMess})
+(connect(mapStateToPropsAuth)(withAuth(Dialogs)));
 
 export default DialogsContainer;
