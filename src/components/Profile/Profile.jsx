@@ -25,7 +25,7 @@ export default function Profile(props) {
                 <div className="main__profile-content">
                     <h2 className="main__profile-name high-text">{props.profile.info.fullName}</h2>
                     <span className="main__profile-info">
-                        <p>About Me: {props.profile.info.aboutMe}</p>
+                        <p>About Me: <span>{props.profile.info.aboutMe}</span></p>
                         <p>{props.profile.info.lookingForAJob ? "Ищу работу" : "Не ищу работу"}</p>
                         <p>О работе: {props.profile.info.lookingForAJobDescription}</p>
                         <p>WebSite: <a target='_blank' href={props.profile.info.contacts.github}>GitHub</a></p>

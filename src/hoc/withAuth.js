@@ -4,7 +4,7 @@ import { Navigate } from "react-router-dom"
 
 let mapStateToPropsForRedirect = (state) => {
     return {
-        isAuthorized: state.auth.isAuthorized
+        auth: state.auth
     }
 };
 
@@ -20,8 +20,11 @@ export const withAuth = (Component) => {
     */ 
 
     let RedirectComponent = (props) => {
-        if (!props.isAuthorized) return <Navigate to={'/login'} />
-        return <Component {...props} />
+        if (!props.auth.isAuthorized && props.auth.userId !== 1) {
+            return <Navigate to={'/login'} />
+        }else if(props.auth.userId !== 1){
+            return <Component {...props} />
+        }
     }
 
     let RedirectComponentWithConnect = connect(mapStateToPropsForRedirect)(RedirectComponent)

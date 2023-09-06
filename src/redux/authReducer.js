@@ -1,9 +1,9 @@
 import { apiFunctions } from "../api/api";
 
 let initialState = {
-    userId: null,
-    login: null,
-    email: null,
+    userId: 1,
+    login: 1,
+    email: 1,
     isAuthorized: false
 }
 
@@ -22,7 +22,10 @@ export default function authReducer(state = initialState, action) {
         case "SET_USER_DATA":
             return {
                 ...state,
-                ...action.data
+                userId: action.data.id,
+                login: action.data.login,
+                email: action.data.email,
+                isAuthorized: action.data.isAuthorized,
             }
         default: return state
     }
@@ -38,6 +41,14 @@ export const authCheck = () => {
                         login: data.data.login,
                         email: data.data.email,
                         isAuthorized: true
+                    }
+                    dispatch(SetUserData(userData))
+                }else{
+                    let userData = {
+                        id: null,
+                        login: null,
+                        email: null,
+                        isAuthorized: false
                     }
                     dispatch(SetUserData(userData))
                 }
