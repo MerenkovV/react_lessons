@@ -1,5 +1,12 @@
 import React from "react"
+import { connect } from "react-redux";
 import { Navigate } from "react-router-dom"
+
+let mapStateToPropsForRedirect = (state) => {
+    return {
+        isAuthorized: state.auth.isAuthorized
+    }
+};
 
 export const withAuth = (Component) => {
     /*
@@ -17,5 +24,7 @@ export const withAuth = (Component) => {
         return <Component {...props} />
     }
 
-    return RedirectComponent;
+    let RedirectComponentWithConnect = connect(mapStateToPropsForRedirect)(RedirectComponent)
+
+    return RedirectComponentWithConnect;
 }

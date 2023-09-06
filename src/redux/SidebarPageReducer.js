@@ -1,7 +1,7 @@
 let initialState = {
     friends: [
         {id: 29272, name: "Vlados", picture: null },
-        {id: 2, name: "Alex", picture: null },
+        {id: 0, name: "Alex", picture: null },
         {id: -1, name: "Rustam", picture: null },
     ]
 };
@@ -36,15 +36,19 @@ const SidebarPageReducer = (state = initialState, action) => {
     }
     if (action.type === "DELETE_FRIEND") {
         
-        let stateCopy = {...state};
+        // let stateCopy = {...state};
         
-        stateCopy.friends = [];
-        state.friends.map(friend=>{
-            if(action.payload.id !== friend.id){
-                stateCopy.friends.push({id:friend.id , name:friend.name, picture: action.payload.picture})
-            }
-        });
-        return stateCopy;
+        // stateCopy.friends = [];
+        // state.friends.map(friend=>{
+        //     if(action.payload.id !== friend.id){
+        //         stateCopy.friends.push({id:friend.id , name:friend.name, picture: action.payload.picture})
+        //     }
+        // });
+        // return stateCopy;
+        return {
+            ...state,
+                friends: state.friends.filter(object => object.id != action.payload.id)
+        }
     }
     return state;
 };

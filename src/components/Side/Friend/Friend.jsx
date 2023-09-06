@@ -7,7 +7,7 @@ export default function Friend(props) {
 
     return (
         <div className="friend">
-            <NavLink to={link} onClick={()=>{props.ChangeId(props.id)}}>
+            <NavLink to={link} onClick={()=>{props.loadUserProfile(props.id)}}>
             <img src={props.picture} className="friend__image"></img>
             <p className="friend__name">{props.name}</p>
             </NavLink>

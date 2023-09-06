@@ -1,7 +1,6 @@
-import React from 'react';
 import Side from './Side';
 import { connect } from 'react-redux';
-import {ChangeId} from '../../redux/ProfilePageReducer'
+import {loadUserProfile} from '../../redux/ProfilePageReducer'
 
 let mapStateToProps = (state) => {
   return {
@@ -9,6 +8,6 @@ let mapStateToProps = (state) => {
   }
 };
 
-const SideContainer = connect(mapStateToProps, {ChangeId})(Side);
+const SideContainer = connect(mapStateToProps, {loadUserProfile})(Side);
 
 export default SideContainer;

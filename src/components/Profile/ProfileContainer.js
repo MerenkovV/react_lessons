@@ -3,6 +3,7 @@ import { SendMes, loadUserProfile } from '../../redux/ProfilePageReducer';
 import Profile from './Profile';
 import { connect } from 'react-redux';
 import {withAuth} from '../../hoc/withAuth';
+import { compose } from 'redux';
 
 class ProfileClass extends React.Component{
 
@@ -11,17 +12,10 @@ class ProfileClass extends React.Component{
     }
 
     render(){
+        debugger
         return <Profile {...this.props}/>
     }
 }
-
-let ProfileWithAuth = withAuth(ProfileClass)
-
-let mapStateToPropsForRedirect = (state) => {
-    return {
-        isAuthorized: state.auth.isAuthorized
-    }
-};
 
 let mapStateToProps = (state) => {
     return {
@@ -29,7 +23,7 @@ let mapStateToProps = (state) => {
     }
 };
 
-const ProfileContainer = connect(mapStateToProps, {SendMes, loadUserProfile})
-(connect(mapStateToPropsForRedirect)(ProfileWithAuth));
-
-export default ProfileContainer;
+export default compose(
+    connect(mapStateToProps, {SendMes, loadUserProfile}),
+    withAuth
+)(ProfileClass);
