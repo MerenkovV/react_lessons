@@ -13,7 +13,7 @@ let initialState = {
             large: 'https://i.pinimg.com/736x/47/16/07/471607026529caa5dbf824e81736be88.jpg'
         },
     },
-    status: "Сейчас изучу react, и буду успешным))) ",
+    status: null,
     posts: [
         { text: "Hey guys! What's going on? I'm here to tell u a halarious story! It was a winter when I was walking in the park nearly to The Great Bridge. Actually, It was a chilly day and snow was going. I walked toward a snowy road and saw how nature can be so beautiful.", likes: 10000 },
         { text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, dolor? Iste, itaque tempora esse cupiditate ea architecto deserunt quaerat. Culpa.", likes: 10 },
