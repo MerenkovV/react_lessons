@@ -15,6 +15,9 @@ export const apiFunctions = {
     getProfile(id) {
         return connection.get(`profile/${id}`)
         .then(info=>info.data)},
+    getStatus(id) {
+        return connection.get(`profile/status/${id}`)
+        .then(info=>info)},
     addFollow(id){
         return connection.post(`follow/${id}`, {})
         .then(info=>info.data)
@@ -22,5 +25,9 @@ export const apiFunctions = {
     deleteFollow(id){
         return connection.delete(`follow/${id}`)
         .then(info=>info.data)
-    }, 
+    },
+    putStatus(status){
+        return connection.put('/profile/status', {status})
+        .then(info=>info.data.resultCode)
+    }
 }

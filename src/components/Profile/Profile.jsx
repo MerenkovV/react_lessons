@@ -2,6 +2,7 @@ import React from 'react';
 import "./Profile.css";
 import Post from './Post/Post';
 import fetch from '../../image/Spinner.svg'
+import { StatusParagraph } from './StatusParagraph';
 
 
 
@@ -13,7 +14,10 @@ export default function Profile(props) {
         TextElement.current.value = "";
     };
     let postElements = props.profile.posts.map( post => <Post text={post.text} likes={post.likes}/>);
-
+    let isMyAccount = false
+    if(props.auth.userId == props.profile.id) {
+        isMyAccount = true
+    }
     return (
         <main className="main">
             <div className="main__head">
@@ -25,7 +29,7 @@ export default function Profile(props) {
                 <div className="main__profile-content">
                     <h2 className="main__profile-name high-text">{props.profile.info.fullName}</h2>
                     <span className="main__profile-info">
-                        <p>About Me: <span>{props.profile.info.aboutMe}</span></p>
+                        <p>About Me: {props.profile.info.aboutMe}</p>
                         <p>{props.profile.info.lookingForAJob ? "Ищу работу" : "Не ищу работу"}</p>
                         <p>О работе: {props.profile.info.lookingForAJobDescription}</p>
                         <p>WebSite: <a target='_blank' href={props.profile.info.contacts.github}>GitHub</a></p>
@@ -33,6 +37,7 @@ export default function Profile(props) {
                 </div>
                 }
             </div>
+            <StatusParagraph putStatus={props.putStatus} status={props.profile.status} isMyAccount={isMyAccount}/>
             <div className="main__posts">
                 <h2 className="main__post-header high-text">My Posts</h2>
                 <textarea ref={TextElement} placeholder='Your news...' type="text" className="main__input" />

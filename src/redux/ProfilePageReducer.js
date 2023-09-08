@@ -11,9 +11,11 @@ let initialState = {
         },
         photos: {
             large: 'https://i.pinimg.com/736x/47/16/07/471607026529caa5dbf824e81736be88.jpg'
-        }
+        },
     },
+    status: "Сейчас изучу react, и буду успешным))) ",
     posts: [
+        { text: "Hey guys! What's going on? I'm here to tell u a halarious story! It was a winter when I was walking in the park nearly to The Great Bridge. Actually, It was a chilly day and snow was going. I walked toward a snowy road and saw how nature can be so beautiful.", likes: 10000 },
         { text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, dolor? Iste, itaque tempora esse cupiditate ea architecto deserunt quaerat. Culpa.", likes: 10 },
         { text: "Информационные технологии (от англ. IT, Information technology) — это использование компьютерных систем или устройств для передачи информации. Такими технологиями пользуются не только работники IT-сферы, но и все люди на планете — от CEO в корпорациях до продавцов на индийских рынках.", likes: 13 },
         { text: "Человек ежедневно взаимодействует с IT-сферой: хранит, отправляет и скачивает информацию. Мама троих детей, которая добавляет в заметки на iPhone список новогодних подарков, тоже использует информационные технологии.", likes: 20 },
@@ -69,6 +71,24 @@ export const LoadProfile = (NewProfile) => {
     )
 };
 
+export const loadProfileStatus = (status) => {
+    return (
+        {
+            type: "LOAD-PROFILE-STATUS",
+            status
+        }
+    )
+}
+
+export const putProfileStatus = (status) => {
+    return (
+        {
+            type: "PUT-PROFILE-STATUS",
+            status
+        }
+    )
+}
+
 const ProfilePageReducer = (state = initialState, action) => {
 
     if (action.type === "ADD-POST") {
@@ -91,6 +111,16 @@ const ProfilePageReducer = (state = initialState, action) => {
             ...state,
             isFetching: action.fetch,
         }
+    } else if (action.type === "LOAD-PROFILE-STATUS") {
+        return {
+            ...state,
+            status: action.status,
+        }
+    } else if (action.type === "PUT-PROFILE-STATUS") {
+        return {
+            ...state,
+            status: action.status,
+        }
     }
 
     return state;
@@ -108,7 +138,25 @@ export const loadUserProfile = (id) => {
                     dispatch(Preloader(false));
                 });
         }
+        apiFunctions.getStatus(id)
+            .then((data) => {
+                //if (id !== 29272) {
+                dispatch(loadProfileStatus(data.data))
+                //}else{
+                //    dispatch(loadProfileStatus(initialState.status))
+                //}
+            });
+    }
+}
 
+export const putStatus = (status) => {
+    return (dispatch) => {
+        apiFunctions.putStatus(status)
+        .then((response)=>{
+            if(response === 0){
+                dispatch(putProfileStatus(status))
+            }
+        })
     }
 }
 

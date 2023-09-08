@@ -1,5 +1,5 @@
 import React from 'react';
-import { SendMes, loadUserProfile } from '../../redux/ProfilePageReducer';
+import { SendMes, loadUserProfile, putStatus } from '../../redux/ProfilePageReducer';
 import Profile from './Profile';
 import { connect } from 'react-redux';
 import {withAuth} from '../../hoc/withAuth';
@@ -23,6 +23,6 @@ let mapStateToProps = (state) => {
 };
 
 export default compose(
-    connect(mapStateToProps, {SendMes, loadUserProfile}),
+    connect(mapStateToProps, {SendMes, loadUserProfile, putStatus}),
     withAuth
 )(ProfileClass);
