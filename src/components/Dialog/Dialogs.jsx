@@ -2,16 +2,9 @@ import React from 'react'
 import DialogItem from './DialogItem/DialogItem'
 import "./Dialogs.css"
 import DialogMan from './DialogMan/DialogMan'
+import { DialogFormContainer } from './DialogForm'
 
 export default function Dialogs(props) {
-
-  let TextArea = React.createRef()
-
-  let onAddMess = () => {
-    let Text = TextArea.current.value;
-    props.AddMess(Text);
-    TextArea.current.value = "";
-  }
 
   let dialogElements = props.page.dialogs.map(data => <DialogMan id={data.id} name={data.name} />);
   let messageElements = props.page.messages.map(data => <DialogItem name={data.name} text={data.message} />);
@@ -27,10 +20,7 @@ export default function Dialogs(props) {
         <div className="main__chat">
           {messageElements}
         </div>
-        <div className="main__write">
-          <textarea ref={TextArea} name="" id="" cols="30" rows="10"></textarea>
-          <button onClick={onAddMess}>Send</button>
-        </div>
+        <DialogFormContainer AddMess={props.AddMess}/>
         </div>
       </div>
     </main>

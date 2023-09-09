@@ -3,16 +3,11 @@ import "./Profile.css";
 import Post from './Post/Post';
 import fetch from '../../image/Spinner.svg'
 import { StatusParagraph } from './StatusParagraph';
+import {ProfileFormContainer} from './ProfileForm';
 
 
 
 export default function Profile(props) {
-    let TextElement = React.createRef();
-    const onSendMes = () => {
-        let text = TextElement.current.value;
-        props.SendMes(text);
-        TextElement.current.value = "";
-    };
     let postElements = props.profile.posts.map( post => <Post text={post.text} likes={post.likes}/>);
     let isMyAccount = false
     if(props.auth.userId == props.profile.id) {
@@ -40,8 +35,7 @@ export default function Profile(props) {
             <StatusParagraph putStatus={props.putStatus} status={props.profile.status} isMyAccount={isMyAccount}/>
             <div className="main__posts">
                 <h2 className="main__post-header high-text">My Posts</h2>
-                <textarea ref={TextElement} placeholder='Your news...' type="text" className="main__input" />
-                <button className="main__button" onClick={onSendMes}>Send</button>
+                <ProfileFormContainer SendMes={props.SendMes}/>
                 <div className="main__posts-wrapper">
                     {postElements}
                 </div>
