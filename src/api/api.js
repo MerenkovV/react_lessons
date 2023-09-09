@@ -27,7 +27,15 @@ export const apiFunctions = {
         .then(info=>info.data)
     },
     putStatus(status){
-        return connection.put('/profile/status', {status})
+        return connection.put('profile/status', {status})
         .then(info=>info.data.resultCode)
+    },
+    LogInProfile(email, password, rememberMe){
+        return connection.post('auth/login', {
+            email,
+            password,
+            rememberMe
+        }).then(info=>info.data)
     }
+
 }

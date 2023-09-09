@@ -16,6 +16,15 @@ export const SetUserData = (data) => {
     )
 };
 
+export const AddUserData = (data) => {
+    return (
+        {
+            type: "ADD_USER_DATA",
+            data
+        }
+    )
+};
+
 export default function authReducer(state = initialState, action) {
 
     switch (action.type) {
@@ -43,7 +52,7 @@ export const authCheck = () => {
                         isAuthorized: true
                     }
                     dispatch(SetUserData(userData))
-                }else{
+                } else {
                     let userData = {
                         id: null,
                         login: null,
@@ -53,5 +62,33 @@ export const authCheck = () => {
                     dispatch(SetUserData(userData))
                 }
             });
+    }
+}
+
+export const LoginingInProfile = (email, password, rememberMe) => {
+    return (dispatch) => {
+        apiFunctions.LogInProfile(email, password, rememberMe)
+            .then(() => {
+                apiFunctions.getAuth()
+                    .then((data) => {
+                        if (data.resultCode === 0) {
+                            let userData = {
+                                id: data.data.id,
+                                login: data.data.login,
+                                email: data.data.email,
+                                isAuthorized: true
+                            }
+                            dispatch(SetUserData(userData))
+                        } else {
+                            let userData = {
+                                id: null,
+                                login: null,
+                                email: null,
+                                isAuthorized: false
+                            }
+                            dispatch(SetUserData(userData))
+                        }
+                    })
+            })
     }
 }

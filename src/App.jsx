@@ -8,7 +8,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import DialogsContainer from './components/Dialog/DialogsContainer';
 import FriendsContainer from './components/Friends/FriendsContainer';
 import HeaderContainer from './components/Header/HeaderClass';
-import Login from './components/Login/Login';
+import {LoginContainer} from './components/Login/Login';
 
 function App() {
   return (
@@ -21,7 +21,7 @@ function App() {
             <Route path='/dialogs/*' element={<DialogsContainer/>} />
             <Route path='/profile/*' element={<ProfileContainer/>} />
             <Route path='/friends/*' element={<FriendsContainer/>} />
-            <Route path='/login/*' element={<Login />} />
+            <Route path='/login/*' element={<LoginContainer />} />
           </Routes>
         </div>
       </div>
