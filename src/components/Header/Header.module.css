@@ -24,3 +24,14 @@
     color: white;
     margin-right: 20px;
   }
+
+  .logout{
+    cursor: pointer;
+    padding: 3px;
+    border-radius: 8px;
+    transition-duration: 300ms;
+  }
+  .logout:hover{
+    background: #b63737;
+    text-decoration: line-through;
+  }

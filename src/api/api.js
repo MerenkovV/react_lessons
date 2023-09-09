@@ -36,6 +36,10 @@ export const apiFunctions = {
             password,
             rememberMe
         }).then(info=>info.data)
+    },
+    LogOutProfile(){
+        return connection.post('auth/logout')
+        .then(info=>info)
     }
 
 }

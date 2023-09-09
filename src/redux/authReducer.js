@@ -4,7 +4,7 @@ let initialState = {
     userId: 1,
     login: 1,
     email: 1,
-    isAuthorized: false
+    isAuthorized: false,
 }
 
 export const SetUserData = (data) => {
@@ -42,26 +42,7 @@ export default function authReducer(state = initialState, action) {
 
 export const authCheck = () => {
     return (dispatch) => {
-        apiFunctions.getAuth()
-            .then((data) => {
-                if (data.resultCode === 0) {
-                    let userData = {
-                        id: data.data.id,
-                        login: data.data.login,
-                        email: data.data.email,
-                        isAuthorized: true
-                    }
-                    dispatch(SetUserData(userData))
-                } else {
-                    let userData = {
-                        id: null,
-                        login: null,
-                        email: null,
-                        isAuthorized: false
-                    }
-                    dispatch(SetUserData(userData))
-                }
-            });
+        return takeMeAuth(dispatch)
     }
 }
 
@@ -69,26 +50,39 @@ export const LoginingInProfile = (email, password, rememberMe) => {
     return (dispatch) => {
         apiFunctions.LogInProfile(email, password, rememberMe)
             .then(() => {
-                apiFunctions.getAuth()
-                    .then((data) => {
-                        if (data.resultCode === 0) {
-                            let userData = {
-                                id: data.data.id,
-                                login: data.data.login,
-                                email: data.data.email,
-                                isAuthorized: true
-                            }
-                            dispatch(SetUserData(userData))
-                        } else {
-                            let userData = {
-                                id: null,
-                                login: null,
-                                email: null,
-                                isAuthorized: false
-                            }
-                            dispatch(SetUserData(userData))
-                        }
-                    })
+                return takeMeAuth(dispatch)
             })
     }
+}
+
+export const LoginingOutProfile = () => {
+    return (dispatch) => {
+        apiFunctions.LogOutProfile()
+            .then(() => {
+                return takeMeAuth(dispatch)
+            })
+    }
+}
+
+const takeMeAuth = (dispatch) => {
+    apiFunctions.getAuth()
+        .then((data) => {
+            if (data.resultCode === 0) {
+                let userData = {
+                    id: data.data.id,
+                    login: data.data.login,
+                    email: data.data.email,
+                    isAuthorized: true
+                }
+                dispatch(SetUserData(userData))
+            } else {
+                let userData = {
+                    id: null,
+                    login: null,
+                    email: null,
+                    isAuthorized: false
+                }
+                dispatch(SetUserData(userData))
+            }
+        })
 }
