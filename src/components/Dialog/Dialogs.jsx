@@ -6,8 +6,8 @@ import { DialogFormContainer } from './DialogForm'
 
 export default function Dialogs(props) {
 
-  let dialogElements = props.page.dialogs.map(data => <DialogMan id={data.id} name={data.name} />);
-  let messageElements = props.page.messages.map(data => <DialogItem name={data.name} text={data.message} />);
+  let dialogElements = props.page.dialogs.map((data, index) => <DialogMan key={index} id={data.id} name={data.name} />);
+  let messageElements = props.page.messages.map((data, index) => <DialogItem key={index} name={data.name} text={data.message} />);
 
   return (
     <main className="main">

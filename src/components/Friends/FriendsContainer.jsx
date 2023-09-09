@@ -17,12 +17,12 @@ class FriendsAPI extends React.Component {
     }
 
     render() {
-        let friendsElements = this.props.friends.map((friend) => {
+        let friendsElements = this.props.friends.map((friend, index) => {
             return (
             <>
             {this.props.isFetching ? 
-            <img style={{width: "97px", height: "97px", marginBottom:"30px"}} src={preloader}/> : 
-            <FriendItem addUserFollow={this.props.addUserFollow} ChangeId={this.props.ChangeId} delUserFollow={this.props.delUserFollow} info={friend} isFollowing={this.props.isFollowing}/>}
+            <img key={index} style={{width: "97px", height: "97px", marginBottom:"30px"}} src={preloader}/> : 
+            <FriendItem key={index} addUserFollow={this.props.addUserFollow} ChangeId={this.props.ChangeId} delUserFollow={this.props.delUserFollow} info={friend} isFollowing={this.props.isFollowing}/>}
             
             </>
             );
@@ -38,7 +38,7 @@ class FriendsAPI extends React.Component {
                 pages.push(i);
             }
         }
-        return <Friends isFetching={this.props.isFetching} onChangePage={this.onChangePage} currentPage={this.props.currentPage} friendsElements={friendsElements} pages={pages}/>
+        return <Friends key={totalPages} isFetching={this.props.isFetching} onChangePage={this.onChangePage} currentPage={this.props.currentPage} friendsElements={friendsElements} pages={pages}/>
         
     }
 }
