@@ -4,6 +4,7 @@ import Profile from './Profile';
 import { connect } from 'react-redux';
 import {withAuth} from '../../hoc/withAuth';
 import { compose } from 'redux';
+import { getProfileInfo } from '../../redux/users-selectors';
 
 class ProfileClass extends React.Component{
 
@@ -18,7 +19,7 @@ class ProfileClass extends React.Component{
 
 let mapStateToProps = (state) => {
     return {
-        profile: state.profilePage,
+        profile: getProfileInfo(state),
     }
 };
 

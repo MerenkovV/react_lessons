@@ -46,7 +46,6 @@
   font-size: 28px;
   font-family: Arial, Helvetica, sans-serif;
   -webkit-transition-duration: 200ms;
-       -o-transition-duration: 200ms;
           transition-duration: 200ms;
 }
 .side__list li {
@@ -103,7 +102,6 @@
           box-shadow: 0 0 5px 0px rgb(203, 203, 203);
   border-radius: 5px;
   -webkit-transition-duration: 100ms;
-       -o-transition-duration: 100ms;
           transition-duration: 100ms;
 }
 .main__dialogs li:first-child {
