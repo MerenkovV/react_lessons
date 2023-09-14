@@ -2,7 +2,7 @@ import React from 'react';
 import "./Profile.css";
 import Post from './Post/Post';
 import fetch from '../../image/Spinner.svg'
-import { StatusParagraph } from './StatusParagraph';
+import { StatusParagraph } from './StatusParagraphWithHooks';
 import {ProfileFormContainer} from './ProfileForm';
 
 
