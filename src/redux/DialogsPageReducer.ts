@@ -1,4 +1,22 @@
-let initialState = {
+const ADD_MESSAGE:string = "DIALOGS/ADD-MESSAGE"
+
+type stateType = {
+  dialogs: Array<{
+    id: number
+    name: string
+  }>
+  messages: Array<{
+    name: string
+    message: string
+  }>
+}
+
+type AddMessType = {
+  type: typeof ADD_MESSAGE, 
+  DialogMessage: string
+}
+
+let initialState:stateType = {
   dialogs: [
       { id: 1, name: "Vlados" },
       { id: 2, name: "Alex" },
@@ -35,18 +53,17 @@ let initialState = {
   ]
 };
 
-export const AddMess = (Text) => {
+export const AddMess = (Text: string):AddMessType => {
     return(
       {
-        type: "ADD-MESSAGE",
+        type: ADD_MESSAGE,
         DialogMessage: Text,
       }
     )
 };
 
-const DialogsPageReducer = (state = initialState, action) => {
-
-    if (action.type === "ADD-MESSAGE") {
+const DialogsPageReducer = (state:stateType = initialState, action:AddMessType):stateType => {
+    if (action.type === ADD_MESSAGE) {
         return {
           ...state,
           messages: [...state.messages, {name: "Me", message: action.DialogMessage}]

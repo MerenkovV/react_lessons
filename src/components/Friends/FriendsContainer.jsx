@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { AddUsers, GetUsersCount, SetUsers, delUserFollow, getPage, addUserFollow } from '../../redux/FriendsPageReducer';
-import {ChangeId} from '../../redux/ProfilePageReducer'
+import { GetUsersCount, SetUsers, delUserFollow, getPage, addUserFollow } from '../../redux/FriendsPageReducer.ts';
+import {ChangeId} from '../../redux/ProfilePageReducer.ts'
 import Friends from './Friends';
 import FriendItem from './FriendItem/FriendItem';
 import preloader from './../../image/Spinner.svg';
@@ -54,6 +54,6 @@ let mapStateToProps = (state) => {
     }
 };
 
-const FriendItemContainer = connect(mapStateToProps, {AddUsers, SetUsers, GetUsersCount, ChangeId, 
+const FriendItemContainer = connect(mapStateToProps, {SetUsers, GetUsersCount, ChangeId, 
     getPage, addUserFollow, delUserFollow })(FriendsAPI);
 export default FriendItemContainer;

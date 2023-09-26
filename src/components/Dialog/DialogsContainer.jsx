@@ -1,5 +1,5 @@
 import Dialogs from './Dialogs'
-import { AddMess } from '../../redux/DialogsPageReducer'
+import { AddMess } from '../../redux/DialogsPageReducer.ts'
 import { connect } from 'react-redux'
 import { withAuth } from '../../hoc/withAuth';
 import { compose } from 'redux';

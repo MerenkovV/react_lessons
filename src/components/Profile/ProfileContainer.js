@@ -1,5 +1,5 @@
 import React from 'react';
-import { SendMes, loadUserProfile, putStatus } from '../../redux/ProfilePageReducer';
+import { SendMes, loadUserProfile, putStatus } from '../../redux/ProfilePageReducer.ts';
 import Profile from './Profile';
 import { connect } from 'react-redux';
 import {withAuth} from '../../hoc/withAuth';

@@ -1,7 +1,7 @@
 import React from 'react'
 import { LoginForm } from './FormComponent'
 import { connect } from 'react-redux';
-import { LoginingInProfile, authCheck } from '../../redux/authReducer'
+import { LoginingInProfile, authCheck } from '../../redux/authReducer.ts'
 import { Navigate } from 'react-router-dom';
 
 export class Login extends React.Component {

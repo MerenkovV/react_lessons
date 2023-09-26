@@ -20,9 +20,9 @@ export const withAuth = (Component) => {
     */ 
 
     let RedirectComponent = (props) => {
-        if (!props.auth.isAuthorized && props.auth.userId !== 1) {
+        if (!props.auth.isAuthorized && props.auth.isChecked) {
             return <Navigate to={'/login'} />
-        }else if(props.auth.userId !== 1){
+        }else if(props.auth.isChecked){
             return <Component {...props} />
         }
     }

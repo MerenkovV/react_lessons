@@ -1,9 +1,9 @@
-import {applyMiddleware, combineReducers, legacy_createStore} from "redux"
-import ProfilePageReducer from "./ProfilePageReducer";
-import DialogsPageReducer from "./DialogsPageReducer";
-import SidebarPageReducer from "./SidebarPageReducer";
-import FriendPageReducer from "./FriendsPageReducer";
-import authReducer from "./authReducer";
+import {applyMiddleware, combineReducers, legacy_createStore, compose} from "redux"
+import ProfilePageReducer from "./ProfilePageReducer.ts";
+import DialogsPageReducer from "./DialogsPageReducer.ts";
+import SidebarPageReducer from "./SidebarPageReducer.ts";
+import FriendPageReducer from "./FriendsPageReducer.ts";
+import authReducer from "./authReducer.ts";
 import ThunkMiddleware from "redux-thunk";
 import { reducer as formReducer } from 'redux-form'
 
@@ -15,7 +15,8 @@ let reducers = combineReducers({
     auth: authReducer,
     form: formReducer
 });
-let store = legacy_createStore(reducers, applyMiddleware(ThunkMiddleware));
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = legacy_createStore(reducers, composeEnhancers(applyMiddleware(ThunkMiddleware)))
 
 window.store = store;
 

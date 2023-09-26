@@ -1,4 +1,12 @@
 import { apiFunctions } from "../api/api";
+import { InfoType, PostType } from "../types/types";
+
+const ADD_POST: string = "ADD-POST"
+const PRELOADER: string = "PRELOADER"
+const CHANGE_ID: string = "CHANGE_ID"
+const LOAD_PROFILE: string = "LOAD_PROFILE"
+const LOAD_PROFILE_STATUS: string = "LOAD_PROFILE_STATUS"
+const PUT_PROFILE_STATUS: string = "PUT_PROFILE_STATUS"
 
 let initialState = {
     info: {
@@ -10,10 +18,11 @@ let initialState = {
             github: "https://github.com/MerenkovV"
         },
         photos: {
-            large: 'https://i.pinimg.com/736x/47/16/07/471607026529caa5dbf824e81736be88.jpg'
+            large: 'https://i.pinimg.com/736x/47/16/07/471607026529caa5dbf824e81736be88.jpg',
+            small: null
         },
-    },
-    status: null,
+    } as InfoType,
+    status: null as string | null,
     posts: [
         { text: "Hey guys! What's going on? I'm here to tell u a halarious story! It was a winter when I was walking in the park nearly to The Great Bridge. Actually, It was a chilly day and snow was going. I walked toward a snowy road and saw how nature can be so beautiful.", likes: 10000 },
         { text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, dolor? Iste, itaque tempora esse cupiditate ea architecto deserunt quaerat. Culpa.", likes: 10 },
@@ -22,108 +31,62 @@ let initialState = {
         { text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, dolor? Iste, itaque tempora esse cupiditate ea architecto deserunt quaerat. Culpa.", likes: 12 },
         { text: "What? How can i do this?", likes: 100 },
         { text: "Hey! I did that!!)))", likes: 500 },
-    ],
+    ] as Array<PostType>,
     id: 29272,
     isFetching: false,
 };
 
-export const SendMes = (text) => {
-    return (
-        {
-            type: "ADD-POST",
-            PostMessage: text,
-        }
-    )
-};
+type StateType = typeof initialState
 
-export const Preloader = (fetch) => {
-    return (
-        {
-            type: "PRELOADER",
-            fetch
-        }
-    )
-};
-
-export const ChangeId = (id) => {
-    return (
-        {
-            type: "CHANGE-ID",
-            id,
-        }
-    )
-};
-
-export const LoadProfile = (NewProfile) => {
-    if (!NewProfile) {
-        return (
-            {
-                type: "LOAD-PROFILE",
-                NewProfile: initialState.info
-            }
-        )
-    }
-    return (
-        {
-            type: "LOAD-PROFILE",
-            NewProfile
-        }
-    )
-};
-
-export const loadProfileStatus = (status) => {
-    return (
-        {
-            type: "LOAD-PROFILE-STATUS",
-            status
-        }
-    )
+type SendMesType = {
+    type: typeof ADD_POST
+    PostMessage: string
 }
+export const SendMes = (text: string):SendMesType =>  ({type: ADD_POST , PostMessage: text})
 
-export const putProfileStatus = (status) => {
-    return (
-        {
-            type: "PUT-PROFILE-STATUS",
-            status
-        }
-    )
-}
+type PreloaderType = {type: typeof PRELOADER, fetch: boolean}
+export const Preloader = (fetch:boolean):PreloaderType => ({type: PRELOADER, fetch})
 
-const ProfilePageReducer = (state = initialState, action) => {
+type ChangeIdType = {type: typeof CHANGE_ID, id: number}
+export const ChangeId = (id: number):ChangeIdType => ({type: CHANGE_ID,id})
 
-    if (action.type === "ADD-POST") {
-        return {
+type LoadProfileType = {type: typeof LOAD_PROFILE, NewProfile: InfoType}
+export const LoadProfile = (NewProfile: InfoType | null): LoadProfileType => ({type: LOAD_PROFILE, 
+NewProfile: !NewProfile ? initialState.info : NewProfile})
+
+type ChangeProfileStatusType = {type: typeof LOAD_PROFILE_STATUS | typeof PUT_PROFILE_STATUS, status: string}
+const ChangeProfileStatus = (status: string, isLoad: boolean):ChangeProfileStatusType => ({type: isLoad ? 
+    LOAD_PROFILE_STATUS : PUT_PROFILE_STATUS, status})
+
+const ProfilePageReducer = (state = initialState, action: any): StateType => {
+
+    switch (action.type){
+        case ADD_POST: return {
             ...state,
             posts: [...state.posts, { text: action.PostMessage, likes: 1 }]
         }
-    } else if (action.type === "LOAD-PROFILE") {
-        return {
+        case LOAD_PROFILE: return {
             ...state,
             info: action.NewProfile
         }
-    } else if (action.type === "CHANGE-ID") {
-        return {
+        case CHANGE_ID: return {
             ...state,
             id: action.id
         }
-    } else if (action.type === "PRELOADER") {
-        return {
+        case PRELOADER: return {
             ...state,
             isFetching: action.fetch,
         }
-    } else if (action.type === "LOAD-PROFILE-STATUS") {
-        return {
+        case LOAD_PROFILE_STATUS: return {
             ...state,
             status: action.status,
         }
-    } else if (action.type === "PUT-PROFILE-STATUS") {
-        return {
+        case PUT_PROFILE_STATUS: return {
             ...state,
             status: action.status,
         }
+        default: return state
     }
-
-    return state;
 };
 
 export const loadUserProfile = (id) => {
@@ -140,11 +103,7 @@ export const loadUserProfile = (id) => {
         }
         apiFunctions.getStatus(id)
             .then((data) => {
-                //if (id !== 29272) {
-                dispatch(loadProfileStatus(data.data))
-                //}else{
-                //    dispatch(loadProfileStatus(initialState.status))
-                //}
+                dispatch(ChangeProfileStatus(data.data, true))
             });
     }
 }
@@ -154,7 +113,7 @@ export const putStatus = (status) => {
         apiFunctions.putStatus(status)
         .then((response)=>{
             if(response === 0){
-                dispatch(putProfileStatus(status))
+                dispatch(ChangeProfileStatus(status, false))
             }
         })
     }

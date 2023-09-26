@@ -1,6 +1,6 @@
 import Side from './Side';
 import { connect } from 'react-redux';
-import {loadUserProfile, ChangeId} from '../../redux/ProfilePageReducer'
+import {loadUserProfile, ChangeId} from '../../redux/ProfilePageReducer.ts'
 
 let mapStateToProps = (state) => {
   return {

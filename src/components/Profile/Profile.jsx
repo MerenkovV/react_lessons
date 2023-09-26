@@ -10,9 +10,7 @@ import {ProfileFormContainer} from './ProfileForm';
 export default function Profile(props) {
     let postElements = props.profile.posts.map( (post, index) => <Post key={index} text={post.text} likes={post.likes}/>);
     let isMyAccount = false
-    if(props.auth.userId == props.profile.id) {
-        isMyAccount = true
-    }
+    if(props.auth.userId == props.profile.id) isMyAccount = true
     return (
         <main className="main">
             <div className="main__head">
