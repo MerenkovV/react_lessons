@@ -21,7 +21,7 @@ export type InfoType = {
     }
 }
 
-export type FriendsArrayType = {
+export type FriendsObjectType = {
     followed: boolean
     id: number
     name: string

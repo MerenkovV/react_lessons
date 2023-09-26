@@ -1,6 +1,7 @@
-import { ChangeFriend } from './SidebarPageReducer';
+// @ts-ignore
+import { ChangeFriend } from './SidebarPageReducer.ts';
 import { apiFunctions } from "../api/api";
-import { FriendsArrayType } from "../types/types";
+import { FriendsObjectType } from "../types/types";
 
 const FOLLOW_FRIEND: string = "FOLLOW_FRIEND"
 const GET_TOTAL_USERS_COUNT: string = "GET_TOTAL_USERS_COUNT"
@@ -11,7 +12,7 @@ const ADD_USERS: string = "ADD_USERS"
 
 
 let initialState = {
-    friends: [] as Array<FriendsArrayType>,
+    friends: [] as Array<FriendsObjectType>,
     pageSize: 6,
     totalUsersCount: 0,
     currentPage: 1,
@@ -19,7 +20,8 @@ let initialState = {
     isFollowing: [] as Array<number>
 };
 
-export const ChangeFollow = (isFollow, id) => ({
+type ChangeFollowType = { type: typeof FOLLOW_FRIEND, payload: { Follow: boolean, id: number } }
+export const ChangeFollow = (isFollow: boolean, id: number): ChangeFollowType => ({
     type: FOLLOW_FRIEND,
     payload: {
         Follow: !isFollow,
@@ -27,33 +29,40 @@ export const ChangeFollow = (isFollow, id) => ({
     }
 })
 
-export const GetUsersCount = (count) => ({
+type GetUsersCountType = { type: typeof GET_TOTAL_USERS_COUNT, payload: { count: number } }
+export const GetUsersCount = (count: number): GetUsersCountType => ({
     type: GET_TOTAL_USERS_COUNT,
     payload: {
         count: count
     }
 })
 
-export const ChangePage = (newPage) => ({
+type ChangePageType = { type: typeof CHANGE_PAGE, payload: { newPage: FriendsObjectType } }
+export const ChangePage = (newPage: FriendsObjectType): ChangePageType => ({
     type: CHANGE_PAGE,
     payload: {
         newPage: newPage
     }
 })
 
-export const FetchPreloader = (fetch) => ({
+type FetchPreloaderType = { type: typeof FETCH_PRELOADER, payload: { fetch: boolean } }
+export const FetchPreloader = (fetch): FetchPreloaderType => ({
     type: FETCH_PRELOADER,
     payload: {
         fetch
     }
 })
 
+type LoadFollowType = { type: typeof FOLLOW_LOAD, payload: { isFollowing: boolean, id: number } }
+export const LoadFollow = (isFollowing: boolean, id: number): LoadFollowType => ({
+    type: FOLLOW_LOAD,
+    payload: { isFollowing, id }
+})
 
-export const LoadFollow = (isFollowing, id) => ({ type: FOLLOW_LOAD, isFollowing, id })
-
-export const SetUsers = (newFriends) => {
+type SetUsersType = { type: typeof ADD_USERS, payload: { newState: { friends: Array<FriendsObjectType> } } }
+export const SetUsers = (newFriends: Array<FriendsObjectType>): SetUsersType => {
     let newState = {
-        friends: newFriends
+        friends: newFriends as Array<FriendsObjectType>
     }
     return (
         {
@@ -67,48 +76,42 @@ export const SetUsers = (newFriends) => {
 
 const FriendPageReducer = (state = initialState, action) => {
 
-
-    if (action.type === FOLLOW_FRIEND) {
-        let friendsCopy = [...state.friends];
-
-        state.friends.forEach((friend, index) => {
-            if (friend.id === action.payload.id) {
-                friendsCopy[index].followed = action.payload.Follow;
+    switch (action.type) {
+        case FOLLOW_FRIEND:
+            let friendsCopy = [...state.friends];
+            state.friends.forEach((friend, index) => {
+                if (friend.id === action.payload.id) {
+                    friendsCopy[index].followed = action.payload.Follow;
+                }
+            });
+            return {
+                ...state,
+                friends: friendsCopy,
             }
-        });
-        return {
-            ...state,
-            friends: friendsCopy,
-        }
-    } else if (action.type === "ADD_USERS") {
-        return {
+        case ADD_USERS: return {
             ...state,
             friends: action.payload.newState.friends,
         }
-    } else if (action.type === "GET_TOTAL_USERS_COUNT") {
-        return {
+        case GET_TOTAL_USERS_COUNT: return {
             ...state,
             totalUsersCount: action.payload.count,
         }
-    } else if (action.type === "CHANGE_PAGE") {
-        return {
+        case CHANGE_PAGE: return {
             ...state,
             currentPage: action.payload.newPage,
         }
-    } else if (action.type === "FETCH_PRELOADER") {
-        return {
+        case FETCH_PRELOADER: return {
             ...state,
             isFetching: action.payload.fetch,
         }
-    } else if (action.type === "FOLLOW_LOAD") {
-        return {
+        case FOLLOW_LOAD: return {
             ...state,
-            isFollowing: action.isFollowing ?
-                [...state.isFollowing, action.id] :
-                state.isFollowing.filter(id => id !== action.id)
+            isFollowing: action.payload.isFollowing ?
+                [...state.isFollowing, action.payload.id] :
+                state.isFollowing.filter(id => id !== action.payload.id)
         }
+        default: return state
     }
-    return state;
 };
 
 export const getPage = (newPage, pageSize) => {
